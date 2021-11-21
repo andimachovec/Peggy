@@ -3,14 +3,15 @@
  * All rights reserved. Distributed under the terms of the MIT license.
  *
  */
-
 #include "mainwindow.h"
+#include "boardview.h"
+#include "pegselectview.h"
 
 #include <Alert.h>
 #include <LayoutBuilder.h>
 #include <Catalog.h>
 #include <Application.h>
-
+#include <SplitView.h>
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "MainWindow"
@@ -23,6 +24,12 @@ MainWindow::MainWindow(BRect geometry)
 
 	//initialize GUI objects
 	fTopMenuBar = new BMenuBar("topmenubar");
+	fBoardView = new BoardView();
+	fPegSelectView = new PegSelectView();
+	BSplitView *main_splitview = new BSplitView(B_HORIZONTAL);
+	main_splitview->AddChild(fBoardView);
+	main_splitview->AddChild(fPegSelectView);
+	
 	
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
@@ -39,10 +46,7 @@ MainWindow::MainWindow(BRect geometry)
 	BLayoutBuilder::Group<>(this, B_VERTICAL,0)
 		.SetInsets(0)
 		.Add(fTopMenuBar)
-		//.AddGroup(B_HORIZONTAL)
-		//	.SetInsets(-1,-1,-1,-1)
-		//	.//Add(fMessageInfoView,20)
-		//.End()	
+		.Add(main_splitview)	
 	.Layout();
 
 }
