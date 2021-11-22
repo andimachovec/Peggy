@@ -1,10 +1,7 @@
 #include "gamerow.h"
 
 
-
-//----------------------------------------------------------------------------
-GameRow::GameRow(void) 
-//----------------------------------------------------------------------------
+GameRow::GameRow()
 {
 
 	for (int i=0;i<4;++i)
@@ -12,13 +9,11 @@ GameRow::GameRow(void)
 		pegs[i]=-1;
 	}
 
-
 }
 
 
-//----------------------------------------------------------------------------
-int GameRow::GetPegColor(int pos)
-//----------------------------------------------------------------------------
+int
+GameRow::GetPegColor(int pos)
 {
 
 	return pegs[pos];
@@ -26,21 +21,18 @@ int GameRow::GetPegColor(int pos)
 }
 
 
-//----------------------------------------------------------------------------
-bool GameRow::SetPegColor(int pos,int color)
-//----------------------------------------------------------------------------
+bool
+GameRow::SetPegColor(int pos,int color)
 {
 
 	pegs[pos]=color;
 	return true;
+
 }
 
 
-
-
-//----------------------------------------------------------------------------
-int GameRow::GetResultBlack()
-//----------------------------------------------------------------------------
+int
+GameRow::GetResultBlack()
 {
 
 	return result_black;
@@ -48,11 +40,8 @@ int GameRow::GetResultBlack()
 }
 
 
-
-
-//----------------------------------------------------------------------------
-int GameRow::GetResultWhite()
-//----------------------------------------------------------------------------
+int
+GameRow::GetResultWhite()
 {
 
 	return result_white;
@@ -60,17 +49,14 @@ int GameRow::GetResultWhite()
 }
 
 
-
-
-//----------------------------------------------------------------------------
-bool GameRow::SetResult(int number_of_blacks,int number_of_whites)
-//----------------------------------------------------------------------------
+bool
+GameRow::SetResult(int number_of_blacks,int number_of_whites)
 {
 
 	result_black=number_of_blacks;
 	result_white=number_of_whites;
-	
-	return true;
-}
 
+	return true;
+
+}
 
