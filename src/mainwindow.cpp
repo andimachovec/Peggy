@@ -11,7 +11,7 @@
 #include <LayoutBuilder.h>
 #include <Catalog.h>
 #include <Application.h>
-#include <SplitView.h>
+#include <SeparatorView.h>
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "MainWindow"
@@ -26,11 +26,8 @@ MainWindow::MainWindow(BRect geometry)
 	fTopMenuBar = new BMenuBar("topmenubar");
 	fBoardView = new BoardView();
 	fPegSelectView = new PegSelectView();
-	BSplitView *main_splitview = new BSplitView(B_HORIZONTAL);
-	main_splitview->AddChild(fBoardView);
-	main_splitview->AddChild(fPegSelectView);
-	
-	
+	BSeparatorView *main_separator = new BSeparatorView(B_VERTICAL);
+
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
 		.AddMenu(B_TRANSLATE("File"))
@@ -46,7 +43,11 @@ MainWindow::MainWindow(BRect geometry)
 	BLayoutBuilder::Group<>(this, B_VERTICAL,0)
 		.SetInsets(0)
 		.Add(fTopMenuBar)
-		.Add(main_splitview)	
+		.AddGroup(B_HORIZONTAL)
+			.Add(fBoardView,3)
+			.Add(main_separator)
+			.Add(fPegSelectView)
+		.End()
 	.Layout();
 
 }
@@ -65,7 +66,7 @@ MainWindow::MessageReceived(BMessage *msg)
 
 	if(msg->WasDropped())
 	{
-		
+
 	}
 
 	switch(msg->what)
@@ -76,7 +77,7 @@ MainWindow::MessageReceived(BMessage *msg)
 			be_app->PostMessage(B_ABOUT_REQUESTED);
 			break;
 		}
-		
+
 		//forward all unhandled messages to the base class
 		default:
 		{
