@@ -8,10 +8,11 @@ APP_MIME_SIG = application/x-vnd.BlueSky-Peggy
 #%{
 # @src->@
 SRCS = \
-	 src/boardview.cpp  \
-	 src/pegselectview.cpp  \
+	 src/buttonview.cpp  \
 	 src/app.cpp  \
+	 src/boardview.cpp  \
 	 src/mainwindow.cpp  \
+	 src/pegselectview.cpp  \
 
 RDEFS = \
 	 Peggy.rdef  \
@@ -20,6 +21,8 @@ RDEFS = \
 RSRC = \
 
 # @<-src@
+#%}
+
 #%}
 
 #%}

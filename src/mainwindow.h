@@ -6,12 +6,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <Window.h>
 #include <MenuBar.h>
 
 
 class BoardView;
 class PegSelectView;
+class ButtonView;
 
 
 enum
@@ -31,7 +33,7 @@ private:
 	BMenuBar			*fTopMenuBar;
 	BoardView			*fBoardView;
 	PegSelectView		*fPegSelectView;
-	
+	ButtonView			*fButtonView;
 };
 
 #endif

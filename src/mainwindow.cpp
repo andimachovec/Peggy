@@ -6,12 +6,15 @@
 #include "mainwindow.h"
 #include "boardview.h"
 #include "pegselectview.h"
+#include "buttonview.h"
 
 #include <Alert.h>
 #include <LayoutBuilder.h>
 #include <Catalog.h>
 #include <Application.h>
 #include <SeparatorView.h>
+#include <iostream>
+
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "MainWindow"
@@ -26,6 +29,7 @@ MainWindow::MainWindow(BRect geometry)
 	fTopMenuBar = new BMenuBar("topmenubar");
 	fBoardView = new BoardView();
 	fPegSelectView = new PegSelectView();
+	fButtonView = new ButtonView();
 	BSeparatorView *main_separator = new BSeparatorView(B_VERTICAL);
 
 	//define menu layout
@@ -48,6 +52,7 @@ MainWindow::MainWindow(BRect geometry)
 			.Add(main_separator)
 			.Add(fPegSelectView)
 		.End()
+		.Add(fButtonView)
 	.Layout();
 
 }
@@ -64,11 +69,6 @@ void
 MainWindow::MessageReceived(BMessage *msg)
 {
 
-	if(msg->WasDropped())
-	{
-
-	}
-
 	switch(msg->what)
 	{
 		// Help/About was clicked
@@ -78,6 +78,11 @@ MainWindow::MessageReceived(BMessage *msg)
 			break;
 		}
 
+		case BV_SUBMITBUTTON_CLICKED:
+		{
+
+			break;
+		}
 		//forward all unhandled messages to the base class
 		default:
 		{
