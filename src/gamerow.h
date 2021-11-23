@@ -2,19 +2,22 @@
 #define GAMEROW_H
 
 
+#include<array>
+
+
 class GameRow {
 public:
 	GameRow();
 	int GetPegColor(int pos);
-	bool SetPegColor(int pos, int color);
+	void SetPegColor(int pos, int color);
 	int GetResultBlack();
 	int	GetResultWhite();
-	bool SetResult(int number_of_blacks, int number_of_whites);
+	void SetResult(int number_of_blacks, int number_of_whites);
 
 private:
 	int result_black;
 	int result_white;
-	int pegs[4];
+	std::array<int, 4> pegs;
 };
 
 

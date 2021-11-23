@@ -21,12 +21,11 @@ GameRow::GetPegColor(int pos)
 }
 
 
-bool
+void
 GameRow::SetPegColor(int pos,int color)
 {
 
 	pegs[pos]=color;
-	return true;
 
 }
 
@@ -49,14 +48,12 @@ GameRow::GetResultWhite()
 }
 
 
-bool
+void
 GameRow::SetResult(int number_of_blacks,int number_of_whites)
 {
 
 	result_black=number_of_blacks;
 	result_white=number_of_whites;
-
-	return true;
 
 }
 

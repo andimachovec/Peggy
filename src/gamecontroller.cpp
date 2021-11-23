@@ -1,11 +1,15 @@
 #include "gamecontroller.h"
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <iostream>
 
 
 GameController::GameController()
 {
 
 	//initialize GameRow objects
-	for (int i=0; i<NUMBER_OF_ROWS; ++i)
+	for (int i=0; i<9; ++i)
 	{
 		GameRows[i] = new GameRow();
 	}
@@ -17,16 +21,15 @@ GameController::GameController()
 }
 
 
-bool
+void
 GameController::EvaluateCurrentRow()
 {
 
-	int counter1,counter2;	//	loop counters
-	int count_black=0;		//	feedback peg counters
+	int count_black=0;
 	int count_white=0;
 
-	int chk_combination[4];  	// the combination to be guessed
-	int chk_guess[4];			// current guess
+	combination_t chk_combination;  // the combination to be guessed
+	combination_t chk_guess;				// current guess
 
 	//Fill the work arrays with the values from the game
 	for (int i=0; i<4; ++i)
@@ -36,7 +39,7 @@ GameController::EvaluateCurrentRow()
 	}
 
 	// check for black pegs and mark the places with -1
-	for (counter1=0;counter1<=3;++counter1)
+	for (int counter1=0; counter1<4; ++counter1)
 	{
 		if (chk_guess[counter1] == chk_combination[counter1] )
 		{
@@ -47,11 +50,11 @@ GameController::EvaluateCurrentRow()
 	}
 
 	//check for white pegs
-	for (counter1=0;counter1<=3;++counter1)
+	for (int counter1=0; counter1<4; ++counter1)
 	{
 		if (chk_guess[counter1] != -1)
 		{
-			for (counter2=0;counter2<=3;++counter2)
+			for (int counter2=0; counter2<4; ++counter2)
 			{
 				if (chk_guess[counter1] == chk_combination[counter2])
 				{
@@ -66,21 +69,20 @@ GameController::EvaluateCurrentRow()
 	//write the black and white peg numbers into the GameRow object
 	GetCurrentRow()->SetResult(count_black,count_white);
 
-	if ((count_black == 4) || (current_row == (NUMBER_OF_ROWS - 1)))
+	if ((count_black == 4) or (current_row == 8))
 	{
 		game_finished=true;
 	}
 
-	return true;
 }
 
 
-bool
+void
 GameController::NextRow()
 {
 
 	++current_row;
-	return true;
+
 }
 
 
@@ -128,7 +130,7 @@ GameController::IsFinished()
 }
 
 
-int* GameController::GetCombination()
+combination_t GameController::GetCombination()
 {
 
 	return combination;

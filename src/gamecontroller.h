@@ -1,31 +1,31 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include <string>
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
 
 #include "gamerow.h"
+#include <array>
+
+
+typedef std::array<int, 4> combination_t;
 
 
 class GameController {
 public:
 	GameController();
-	bool EvaluateCurrentRow();
-	bool NextRow();
+	void EvaluateCurrentRow();
+	void NextRow();
 	int GetCurrentRowNumber();
 	GameRow *GetCurrentRow();
 	bool IsFinished();
-	int *GetCombination();
+	combination_t GetCombination();
 
 private:
-	bool 		init_combination();		//initialize the combination with random numbers
-	bool		game_finished;				//Flag that indicates if the game is finished or not
-	int 		current_row;				//current row number (starting at 0)
-	int			combination[4];				// 4-number(color) combination that the player must guess
-	GameRow		*GameRows[NUMBER_OF_ROWS];	// Array of GameRow Objects for each row
+	bool 					init_combination();
+
+	bool					game_finished;
+	int 					current_row;
+	combination_t			combination;
+	std::array<GameRow*, 9> GameRows;
 };
 
 
