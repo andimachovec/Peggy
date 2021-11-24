@@ -30,3 +30,29 @@ Peg::SetCenter(BPoint center)
 	fCenter = center;
 
 }
+
+
+void
+Peg::SetColor(rgb_color color)
+{
+
+	fColor = color;
+
+}
+
+
+void
+Peg::SetColor(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+{
+
+	fColor.set_to(red, green, blue, alpha);
+
+}
+
+
+
+
+
+
+
+

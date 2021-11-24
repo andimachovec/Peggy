@@ -30,7 +30,7 @@ public:
 private:
 	std::array<BoardRow*, 9> fRows;
 	float fColorPegRadius;
-
+	float fResultPegRadius;
 };
 
 

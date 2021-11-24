@@ -52,9 +52,10 @@ BoardView::BoardView()
 	BView("boardview", B_SUPPORTS_LAYOUT|B_WILL_DRAW)
 {
 
-	//initialize rows
 	fColorPegRadius = 20;
+	fResultPegRadius = 5;
 
+	//initialize rows
 	for(int i = 0; i < 9 ; ++i)
 	{
 		fRows[i] = new BoardRow(this);
@@ -83,7 +84,7 @@ BoardView::Draw(BRect updateRect)
 		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
 		{
 			fRows[row]->GetColorPeg(peg_nr)->Draw();
-			//fRows[row]->GetResultPeg(peg_nr)->Draw();
+			fRows[row]->GetResultPeg(peg_nr)->Draw();
 		}
 	}
 
@@ -94,7 +95,7 @@ void
 BoardView::LayoutChanged()
 {
 
-	float delta_x = (Bounds().Width() - 8*fColorPegRadius) / 5;
+	float delta_x = (Bounds().Width() - 10*fColorPegRadius) / 6;
 	float delta_y = (Bounds().Height() - 18*fColorPegRadius) / 10;
 
 	BPoint peg_center;
@@ -106,16 +107,31 @@ BoardView::LayoutChanged()
 	std::cout << "View Width" << Bounds().Width() << std::endl;
 	std::cout << "delta Y: " << delta_y << std::endl << std::endl;
 
-
 	for(int row = 0; row < 9 ; ++row)
 	{
-		std::cout << "Row " << row << std::endl;
-
+		//std::cout << "Row " << row << std::endl;
 		peg_center.x = delta_x+fColorPegRadius;
+
+		//calculate result peg positions
+		float distance = fResultPegRadius*2;
+		fRows[row]->GetResultPeg(0)->SetCenter(
+			BPoint(peg_center.x+distance, peg_center.y-distance));
+		fRows[row]->GetResultPeg(1)->SetCenter(
+			BPoint(peg_center.x-distance, peg_center.y-distance));
+		fRows[row]->GetResultPeg(2)->SetCenter(
+			BPoint(peg_center.x-distance, peg_center.y+distance));
+		fRows[row]->GetResultPeg(3)->SetCenter(
+			BPoint(peg_center.x+distance, peg_center.y+distance));
+
+
+
+		//calculate color peg positions
+		peg_center.x+=delta_x+2*fColorPegRadius;
+
 		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
 		{
 			std::cout << "\t" <<"Peg " << peg_nr << ": X: " << peg_center.x << " Y: " <<
-					peg_center.y << std::endl;
+				peg_center.y << std::endl;
 
 			fRows[row]->GetColorPeg(peg_nr)->SetCenter(peg_center);
 			peg_center.x+=delta_x+2*fColorPegRadius;
@@ -124,16 +140,8 @@ BoardView::LayoutChanged()
 		peg_center.y=peg_center.y-delta_y-2*fColorPegRadius;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
+	//only for color contrast testing -> remove when colors are OK
+	fRows[3]->GetResultPeg(1)->SetColor(0,0,0);
+	fRows[3]->GetResultPeg(2)->SetColor(255,255,255);
 
 }
