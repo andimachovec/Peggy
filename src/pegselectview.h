@@ -12,6 +12,9 @@ public:
 	PegSelectView();
 	void Draw(BRect updateRect);
 	void LayoutChanged();
+	void MouseDown(BPoint point);
+	void MouseMoved(BPoint point, uint32 transit, const BMessage* message);
+
 
 private:
 	std::array<Peg*, 6> fPegs;

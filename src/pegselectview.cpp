@@ -57,3 +57,23 @@ PegSelectView::LayoutChanged()
 
 }
 
+
+void
+PegSelectView::MouseDown(BPoint point)
+{
+
+	std::cout << "MouseDown: X: " << point.x << "Y: " << point.y << std::endl;
+
+}
+
+
+void
+PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
+{
+
+	std::cout << "MouseMoved: X: " << point.x << "Y: " << point.y << std::endl;
+
+}
+
+
+
