@@ -1,5 +1,5 @@
 #include "boardview.h"
-
+#include <iostream>
 
 BoardRow::BoardRow(BView *target_view)
 {
@@ -98,23 +98,42 @@ BoardView::LayoutChanged()
 	float delta_y = (Bounds().Height() - 18*fColorPegRadius) / 10;
 
 	BPoint peg_center;
-	peg_center.x = delta_x+fColorPegRadius;
 	peg_center.y = Bounds().Height()-delta_y-fColorPegRadius;
 
 
-	BPoint peg_test = peg_center;
-	peg_test.y = delta_y+2*fColorPegRadius;
-	fRows[8]->GetColorPeg(0)->SetCenter(peg_test);
+	//debug output:
+	std::cout << "View Height" << Bounds().Height() << std::endl;
+	std::cout << "View Width" << Bounds().Width() << std::endl;
+	std::cout << "delta Y: " << delta_y << std::endl << std::endl;
+
 
 	for(int row = 0; row < 9 ; ++row)
 	{
+		std::cout << "Row " << row << std::endl;
+
+		peg_center.x = delta_x+fColorPegRadius;
 		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
 		{
+			std::cout << "\t" <<"Peg " << peg_nr << ": X: " << peg_center.x << " Y: " <<
+					peg_center.y << std::endl;
+
 			fRows[row]->GetColorPeg(peg_nr)->SetCenter(peg_center);
 			peg_center.x+=delta_x+2*fColorPegRadius;
 		}
 
-		peg_center.y-=delta_y-2*fColorPegRadius;
+		peg_center.y=peg_center.y-delta_y-2*fColorPegRadius;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
