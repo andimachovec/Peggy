@@ -5,7 +5,7 @@
 
 PegSelectView::PegSelectView()
 	:
-	BView("pegselectview", B_SUPPORTS_LAYOUT|B_WILL_DRAW)
+	BView("pegselectview", B_SUPPORTS_LAYOUT|B_WILL_DRAW|B_FULL_UPDATE_ON_RESIZE)
 {
 
 	//initialize peg colors
@@ -71,8 +71,16 @@ void
 PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 {
 
-	std::cout << "MouseMoved: X: " << point.x << "Y: " << point.y << std::endl;
-
+	//std::cout << "MouseMoved: X: " << point.x << "Y: " << point.y << std::endl;
+	for(int peg_nr = 0; peg_nr < 6; ++peg_nr)
+	{
+		if (fPegs[peg_nr]->Contains(point))
+		{
+			std::cout << "contained in peg " << peg_nr << std::endl;	
+			break;
+		}
+	}
+	
 }
 
 

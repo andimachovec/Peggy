@@ -49,7 +49,7 @@ BoardRow::GetResultPeg(int peg_nr)
 
 BoardView::BoardView()
 	:
-	BView("boardview", B_SUPPORTS_LAYOUT|B_WILL_DRAW)
+	BView("boardview", B_SUPPORTS_LAYOUT|B_WILL_DRAW|B_FULL_UPDATE_ON_RESIZE)
 {
 
 	fColorPegRadius = 20;
