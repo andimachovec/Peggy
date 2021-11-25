@@ -24,6 +24,8 @@ PegSelectView::PegSelectView()
 		fPegs[i] = new Peg(this, BPoint(), fPegRadius, fPegColors[i]);
 	}
 
+	fMouseDown = false;
+
 }
 
 
@@ -62,8 +64,23 @@ void
 PegSelectView::MouseDown(BPoint point)
 {
 
-	std::cout << "MouseDown: X: " << point.x << "Y: " << point.y << std::endl;
+	int peg_nr;
 
+	if (over_peg(point, peg_nr))
+	{
+		SetMouseEventMask(B_FULL_POINTER_HISTORY);
+		fMouseDown = true;
+	}
+
+}
+
+
+void
+PegSelectView::MouseUp(BPoint point)
+{
+
+	fMouseDown = false;
+	SetMouseEventMask(B_NO_POINTER_HISTORY);
 }
 
 
@@ -71,17 +88,29 @@ void
 PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 {
 
-	//std::cout << "MouseMoved: X: " << point.x << "Y: " << point.y << std::endl;
-	for(int peg_nr = 0; peg_nr < 6; ++peg_nr)
+	if ((transit == B_EXITED_VIEW) and fMouseDown)
+	{
+		std::cout << "initiate Drag and Drop" << std::endl;
+		fMouseDown = false;
+	}
+
+
+}
+
+
+bool
+PegSelectView::over_peg(BPoint point, int &peg_nr)
+{
+
+	for(peg_nr = 0; peg_nr < 6; ++peg_nr)
 	{
 		if (fPegs[peg_nr]->Contains(point))
 		{
-			std::cout << "contained in peg " << peg_nr << std::endl;	
-			break;
+			return true;
 		}
 	}
-	
-}
 
+	return false;
+}
 
 
