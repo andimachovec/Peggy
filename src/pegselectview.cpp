@@ -90,8 +90,13 @@ PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 
 	if ((transit == B_EXITED_VIEW) and fMouseDown)
 	{
-		std::cout << "initiate Drag and Drop" << std::endl;
+
 		fMouseDown = false;
+		SetMouseEventMask(B_NO_POINTER_HISTORY);
+
+		BMessage drag_message;
+		DragMessage(&drag_message, BRect(0,0,10,10));
+
 	}
 
 
