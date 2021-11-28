@@ -70,7 +70,9 @@ PegSelectView::MouseDown(BPoint point)
 	{
 		SetMouseEventMask(B_FULL_POINTER_HISTORY);
 		fMouseDown = true;
+		fDraggedPegNr = peg_nr;
 	}
+
 
 }
 
@@ -95,7 +97,7 @@ PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 		SetMouseEventMask(B_NO_POINTER_HISTORY);
 
 		BMessage drag_message;
-		DragMessage(&drag_message, BRect(0,0,10,10));
+		DragMessage(&drag_message, fPegs[fDraggedPegNr]->GetBitmap(), BPoint(20,20));
 
 	}
 

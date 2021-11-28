@@ -24,6 +24,7 @@ private:
 	std::array<rgb_color, 6> fPegColors;
 	float fPegRadius;
 	bool fMouseDown;
+	int fDraggedPegNr;
 
 };
 
