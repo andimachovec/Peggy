@@ -7,6 +7,11 @@
 #include "peg.h"
 
 
+enum {
+	PV_DRAG_PEG = 'pv00',
+};
+
+
 class PegSelectView : public BView {
 public:
 	PegSelectView();
@@ -24,7 +29,7 @@ private:
 	std::array<rgb_color, 6> fPegColors;
 	float fPegRadius;
 	bool fMouseDown;
-	int fDraggedPegNr;
+	uint8 fDraggedPegNr;
 
 };
 
