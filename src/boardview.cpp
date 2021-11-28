@@ -1,5 +1,7 @@
 #include "boardview.h"
+#include "pegselectview.h"
 #include <iostream>
+
 
 BoardRow::BoardRow(BView *target_view)
 {
@@ -61,6 +63,16 @@ BoardView::BoardView()
 		fRows[i] = new BoardRow(this);
 	}
 
+	fActiveRow = 0;
+
+	//initialize peg colors
+	fPegColors[0].set_to(255,0,0);
+	fPegColors[1].set_to(0,255,0);
+	fPegColors[2].set_to(0,0,255);
+	fPegColors[3].set_to(255,255,0);
+	fPegColors[4].set_to(255,0,255);
+	fPegColors[5].set_to(255,179,71);
+
 }
 
 
@@ -71,6 +83,45 @@ BoardView::~BoardView()
 		delete fRows[i];
 	}
 }
+
+
+void
+BoardView::MessageReceived(BMessage *msg)
+{
+
+	switch(msg->what)
+	{
+		case PV_DRAG_PEG:
+		{
+			//get color and drop point
+			uint8 color_code;
+			msg->FindUInt8("color", &color_code);
+			BPoint drop_point;
+			msg->FindPoint("_drop_point_", &drop_point);
+			drop_point = ConvertFromScreen(drop_point);  //drop point comes in screen coordinates
+
+			//check in which hole the peg was dropped
+			uint8 row_nr, hole_nr;
+			if (over_hole(drop_point, row_nr, hole_nr))
+			{
+				if (row_nr == fActiveRow) //only continue if peg was dropped in the currently played row
+				{
+					fRows[row_nr]->GetColorPeg(hole_nr)->SetColor(fPegColors[color_code]);
+					Invalidate();
+				}
+			}
+
+
+			break;
+		}
+
+		default:
+			BView::MessageReceived(msg);
+			break;
+	}
+
+}
+
 
 void
 BoardView::Draw(BRect updateRect)
@@ -103,9 +154,9 @@ BoardView::LayoutChanged()
 
 
 	//debug output:
-	std::cout << "View Height" << Bounds().Height() << std::endl;
-	std::cout << "View Width" << Bounds().Width() << std::endl;
-	std::cout << "delta Y: " << delta_y << std::endl << std::endl;
+	//std::cout << "View Height" << Bounds().Height() << std::endl;
+	//std::cout << "View Width" << Bounds().Width() << std::endl;
+	//std::cout << "delta Y: " << delta_y << std::endl << std::endl;
 
 	for(int row = 0; row < 9 ; ++row)
 	{
@@ -123,15 +174,13 @@ BoardView::LayoutChanged()
 		fRows[row]->GetResultPeg(3)->SetCenter(
 			BPoint(peg_center.x+distance, peg_center.y+distance));
 
-
-
 		//calculate color peg positions
 		peg_center.x+=delta_x+2*fColorPegRadius;
 
 		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
 		{
-			std::cout << "\t" <<"Peg " << peg_nr << ": X: " << peg_center.x << " Y: " <<
-				peg_center.y << std::endl;
+			//std::cout << "\t" <<"Peg " << peg_nr << ": X: " << peg_center.x << " Y: " <<
+			//	peg_center.y << std::endl;
 
 			fRows[row]->GetColorPeg(peg_nr)->SetCenter(peg_center);
 			peg_center.x+=delta_x+2*fColorPegRadius;
@@ -145,3 +194,36 @@ BoardView::LayoutChanged()
 	fRows[3]->GetResultPeg(2)->SetColor(255,255,255);
 
 }
+
+
+void
+BoardView::SetActiveRow(uint8 row_nr)
+{
+
+	fActiveRow = row_nr;
+
+}
+
+
+bool
+BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
+{
+
+	for (row_nr = 0; row_nr < 9; ++row_nr)
+	{
+		for (hole_nr = 0; hole_nr < 4; ++hole_nr)
+		{
+			if (fRows[row_nr]->GetColorPeg(hole_nr)->Contains(point))
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+
+
+
