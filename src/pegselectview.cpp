@@ -99,7 +99,8 @@ PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 
 		BMessage drag_message(PV_DRAG_PEG);
 		drag_message.AddUInt8("color", fDraggedPegNr );
-		DragMessage(&drag_message, fPegs[fDraggedPegNr]->GetBitmap(), BPoint(20,20));
+		BBitmap *drag_bitmap = new BBitmap(fPegs[fDraggedPegNr]->GetBitmap()); //copy the bitmap from the peg
+		DragMessage(&drag_message, drag_bitmap, BPoint(20,20));				   //because it is deleted by the d&d system
 
 	}
 
