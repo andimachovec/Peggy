@@ -254,14 +254,14 @@ BoardView::MouseDown(BPoint point)
 
 		if (over_hole(point, row_nr, hole_nr))
 		{
-			if (row_nr == fActiveRow) //only continue if in the currently active row
+			//only continue if in the currently active row and the hole isn´t empty
+			if ((row_nr == fActiveRow)and (fRows[fActiveRow]->GetColorPeg(hole_nr)->GetColorIndex() != 0))
 			{
 				SetMouseEventMask(B_FULL_POINTER_HISTORY);
 				fMouseDown = true;
 				fDraggedPegNr = hole_nr;
 			}
 		}
-
 	}
 }
 
