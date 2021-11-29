@@ -64,15 +64,21 @@ void
 PegSelectView::MouseDown(BPoint point)
 {
 
-	int peg_nr;
+	BPoint location;
+	uint32 buttons;
+	GetMouse(&location, &buttons);
 
-	if (over_peg(point, peg_nr))
+	if (buttons == B_PRIMARY_MOUSE_BUTTON)
 	{
-		SetMouseEventMask(B_FULL_POINTER_HISTORY);
-		fMouseDown = true;
-		fDraggedPegNr = peg_nr;
-	}
+		int peg_nr;
 
+		if (over_peg(point, peg_nr))
+		{
+			SetMouseEventMask(B_FULL_POINTER_HISTORY);
+			fMouseDown = true;
+			fDraggedPegNr = peg_nr;
+		}
+	}
 
 }
 
