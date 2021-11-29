@@ -116,9 +116,21 @@ BoardView::MessageReceived(BMessage *msg)
 			uint8 row_nr, hole_nr;
 			if (over_hole(drop_point, row_nr, hole_nr))
 			{
-				if (row_nr == fActiveRow) // only continue if peg was dropped in the currently played row
+				// only continue if peg was dropped in the currently played row
+				if (row_nr == fActiveRow)
 				{
+					//if position is already occupied, swap the peg colors
+					if (fRows[fActiveRow]->GetColorPeg(hole_nr)->GetColorIndex() != 0)
+					{
+						uint8 swap_color_index = fRows[fActiveRow]->GetColorPeg(hole_nr)->GetColorIndex();
+						fRows[fActiveRow]->GetColorPeg(drag_position)->SetColorIndex(swap_color_index);
+					}
+
 					fRows[fActiveRow]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
+				}
+				else
+				{
+					fRows[fActiveRow]->GetColorPeg(drag_position)->SetColorIndex(color_index);
 				}
 			}
 			else  // if dropped on invalid position, reset color on original position
