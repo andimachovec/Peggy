@@ -27,7 +27,6 @@ private:
 	bool over_peg(BPoint point, int &peg_nr);
 
 	std::array<Peg*, 6> fPegs;
-	std::array<rgb_color, 6> fPegColors;
 	float fPegRadius;
 	bool fMouseDown;
 	uint8 fDraggedPegNr;

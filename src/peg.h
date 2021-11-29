@@ -4,15 +4,16 @@
 
 #include <View.h>
 #include <Bitmap.h>
+#include <array>
 
 
 class Peg {
 public:
-	Peg(BView *target, BPoint center, float radius, rgb_color color);
+	Peg(BView *target, BPoint center, float radius, uint8 color_index);
 	void Draw();
 	void SetCenter(BPoint center);
-	void SetColor(rgb_color color);
-	void SetColor(uint8 red, uint8 green, uint8 blue, uint8 alpha=255);
+	void SetColorIndex(uint8 color_index);
+	uint8 GetColorIndex();
 	bool Contains(BPoint point);
 	BBitmap* GetBitmap();
 
@@ -23,7 +24,8 @@ private:
 	BView *fTarget;
 	BPoint fCenter;
 	float fRadius;
-	rgb_color fColor;
+	std::array<rgb_color, 9> fColors;
+	uint8 fColorIndex;
 	BBitmap *fBitmap;
 
 };

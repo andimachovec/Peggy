@@ -7,13 +7,10 @@ BoardRow::BoardRow(BView *target_view)
 {
 
 	//initialize pegs
-	rgb_color init_color;
-	init_color.set_to(54, 34, 4);
-
 	for(int i = 0; i < 4 ; ++i)
 	{
-		fColorPegs[i] = new Peg(target_view, BPoint(), 20, init_color);
-		fResultPegs[i] = new Peg(target_view, BPoint(), 5, init_color);
+		fColorPegs[i] = new Peg(target_view, BPoint(), 20, 0);
+		fResultPegs[i] = new Peg(target_view, BPoint(), 5, 0);
 	}
 
 }
@@ -64,15 +61,7 @@ BoardView::BoardView()
 	}
 
 	fActiveRow = 0;
-
-	//initialize peg colors
-	fPegColors[0].set_to(255,0,0);
-	fPegColors[1].set_to(0,255,0);
-	fPegColors[2].set_to(0,0,255);
-	fPegColors[3].set_to(255,255,0);
-	fPegColors[4].set_to(255,0,255);
-	fPegColors[5].set_to(255,179,71);
-
+	fMouseDown = false;
 }
 
 
@@ -91,28 +80,54 @@ BoardView::MessageReceived(BMessage *msg)
 
 	switch(msg->what)
 	{
-		case PV_DRAG_PEG:
+		case PV_DRAG_PEG:	// color peg is dropped from the selection view
 		{
-			//get color and drop point
-			uint8 color_code;
-			msg->FindUInt8("color", &color_code);
+			// get color and drop point
+			uint8 color_index;
+			msg->FindUInt8("color_index", &color_index);
 			BPoint drop_point;
 			msg->FindPoint("_drop_point_", &drop_point);
-			drop_point = ConvertFromScreen(drop_point);  //drop point comes in screen coordinates
+			drop_point = ConvertFromScreen(drop_point);  // drop point comes in screen coordinates
 
-			//check in which hole the peg was dropped
+			// check in which hole the peg was dropped
 			uint8 row_nr, hole_nr;
 			if (over_hole(drop_point, row_nr, hole_nr))
 			{
-				if (row_nr == fActiveRow) //only continue if peg was dropped in the currently played row
+				if (row_nr == fActiveRow) // only continue if peg was dropped in the currently played row
 				{
-					fRows[row_nr]->GetColorPeg(hole_nr)->SetColor(fPegColors[color_code]);
+					fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
 					Invalidate();
 				}
 			}
 
-
 			break;
+		}
+
+		case BV_DRAG_PEG:	// color peg is dropped from board view itself
+		{
+			BPoint drop_point;
+			msg->FindPoint("_drop_point_", &drop_point);
+			drop_point = ConvertFromScreen(drop_point);  // drop point comes in screen coordinates
+			uint8 color_index, drag_position;
+			msg->FindUInt8("color_index", &color_index);
+			msg->FindUInt8("drag_position", &drag_position);
+
+			// check whether or not the peg was dropped on a valid position
+			uint8 row_nr, hole_nr;
+			if (over_hole(drop_point, row_nr, hole_nr))
+			{
+				if (row_nr == fActiveRow) // only continue if peg was dropped in the currently played row
+				{
+					fRows[fActiveRow]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
+				}
+			}
+			else  // if dropped on invalid position, reset color on original position
+			{
+				fRows[fActiveRow]->GetColorPeg(drag_position)->SetColorIndex(color_index);
+			}
+
+			Invalidate();
+
 		}
 
 		default:
@@ -190,8 +205,8 @@ BoardView::LayoutChanged()
 	}
 
 	//only for color contrast testing -> remove when colors are OK
-	fRows[3]->GetResultPeg(1)->SetColor(0,0,0);
-	fRows[3]->GetResultPeg(2)->SetColor(255,255,255);
+	fRows[3]->GetResultPeg(1)->SetColorIndex(1);
+	fRows[3]->GetResultPeg(2)->SetColorIndex(2);
 
 }
 
@@ -214,15 +229,64 @@ BoardView::MouseDown(BPoint point)
 		{
 			if (row_nr == fActiveRow) //only continue if in the currently active row
 			{
-				fRows[row_nr]->GetColorPeg(hole_nr)->SetColor(54, 34, 4);
-				Invalidate();
+				fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(0); 	//set peg color to board color,
+				Invalidate();											//visually removing the peg
 			}
 		}
 	}
 
+	else if (buttons == B_PRIMARY_MOUSE_BUTTON)
+	{
 
+		uint8 row_nr, hole_nr;
+
+		if (over_hole(point, row_nr, hole_nr))
+		{
+			if (row_nr == fActiveRow) //only continue if in the currently active row
+			{
+				SetMouseEventMask(B_FULL_POINTER_HISTORY);
+				fMouseDown = true;
+				fDraggedPegNr = hole_nr;
+			}
+		}
+
+	}
+}
+
+
+void
+BoardView::MouseUp(BPoint point)
+{
+
+	fMouseDown = false;
+	SetMouseEventMask(B_NO_POINTER_HISTORY);
 
 }
+
+
+void
+BoardView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
+{
+
+	if ((transit == B_INSIDE_VIEW) and fMouseDown)
+	{
+		fMouseDown = false;
+		SetMouseEventMask(B_NO_POINTER_HISTORY);
+
+		BMessage drag_message(BV_DRAG_PEG);
+		drag_message.AddUInt8("color_index", fRows[fActiveRow]->GetColorPeg(fDraggedPegNr)->GetColorIndex());
+		drag_message.AddUInt8("drag_position", fDraggedPegNr);
+		BBitmap *drag_bitmap = new BBitmap(fRows[fActiveRow]	//copy the bitmap from the peg
+				->GetColorPeg(fDraggedPegNr)->GetBitmap()); 	//because it is deleted by the d&d system
+		fRows[fActiveRow]->GetColorPeg(fDraggedPegNr)->SetColorIndex(0);
+		Invalidate();
+		DragMessage(&drag_message, drag_bitmap, BPoint(20,20));
+
+	}
+
+}
+
+
 void
 BoardView::SetActiveRow(uint8 row_nr)
 {
@@ -249,8 +313,4 @@ BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
 
 	return false;
 }
-
-
-
-
 

@@ -7,6 +7,11 @@
 #include "peg.h"
 
 
+enum {
+	BV_DRAG_PEG = 'bv00',
+};
+
+
 class BoardRow {
 public:
 	BoardRow(BView *target_view);
@@ -28,16 +33,19 @@ public:
 	void Draw(BRect updateRect);
 	void LayoutChanged();
 	void MouseDown(BPoint point);
+	void MouseUp(BPoint point);
+	void MouseMoved(BPoint point, uint32 transit, const BMessage* message);
 	void SetActiveRow(uint8 row_nr);
 
 private:
 	bool over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr);
 
 	std::array<BoardRow*, 9> fRows;
-	std::array<rgb_color, 6> fPegColors;
 	float 	fColorPegRadius;
 	float 	fResultPegRadius;
 	uint8	fActiveRow;
+	bool fMouseDown;
+	uint8 fDraggedPegNr;
 
 };
 

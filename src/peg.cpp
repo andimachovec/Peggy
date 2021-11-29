@@ -2,12 +2,12 @@
 #include <cmath>
 
 
-Peg::Peg(BView *target, BPoint center, float radius, rgb_color color)
+Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 	:
 	fTarget(target),
 	fCenter(center),
 	fRadius(radius),
-	fColor(color)
+	fColorIndex(color_index)
 {
 
 	fBitmap = new BBitmap(BRect(0,0,40,40), B_RGBA32, true);
@@ -29,6 +29,21 @@ void
 Peg::SetCenter(BPoint center)
 {
 
+	//	initialize peg colors
+	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
+
+	// for the result pegs
+	fColors[1].set_to(0,0,0);		// black
+	fColors[2].set_to(255,255,255);		// white
+
+	// for the color pegs
+	fColors[3].set_to(255,0,0); 	// red
+	fColors[4].set_to(0,255,0);		// green
+	fColors[5].set_to(0,0,255);		// blue
+	fColors[6].set_to(255,255,0);	// yellow
+	fColors[7].set_to(255,0,255);	// magenta
+	fColors[8].set_to(255,179,71);	// orange
+
 	fCenter = center;
 	create_bitmap();
 
@@ -36,23 +51,24 @@ Peg::SetCenter(BPoint center)
 
 
 void
-Peg::SetColor(rgb_color color)
+Peg::SetColorIndex(uint8 color_index)
 {
 
-	fColor = color;
+	fColorIndex = color_index;
 	create_bitmap();
 
 }
 
 
-void
-Peg::SetColor(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+uint8
+Peg::GetColorIndex()
 {
 
-	fColor.set_to(red, green, blue, alpha);
-	create_bitmap();
+	return fColorIndex;
 
 }
+
+
 
 
 bool
@@ -118,7 +134,7 @@ Peg::draw_peg(BView *drawing_view, BPoint center)
 {
 
 	rgb_color temp_color = drawing_view->HighColor();
-	drawing_view->SetHighColor(fColor);
+	drawing_view->SetHighColor(fColors[fColorIndex]);
 	drawing_view->FillEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
 	drawing_view->SetHighColor(temp_color);
 

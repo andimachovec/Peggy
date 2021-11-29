@@ -8,20 +8,14 @@ PegSelectView::PegSelectView()
 	BView("pegselectview", B_SUPPORTS_LAYOUT|B_WILL_DRAW|B_FULL_UPDATE_ON_RESIZE)
 {
 
-	//initialize peg colors
-	fPegColors[0].set_to(255,0,0);
-	fPegColors[1].set_to(0,255,0);
-	fPegColors[2].set_to(0,0,255);
-	fPegColors[3].set_to(255,255,0);
-	fPegColors[4].set_to(255,0,255);
-	fPegColors[5].set_to(255,179,71);
+
 
 	//initialize pegs
 	fPegRadius = 20;
 
 	for(int i = 0; i < 6; ++i)
 	{
-		fPegs[i] = new Peg(this, BPoint(), fPegRadius, fPegColors[i]);
+		fPegs[i] = new Peg(this, BPoint(), fPegRadius, i+3); //actual colors start at index 3
 	}
 
 	fMouseDown = false;
@@ -117,15 +111,13 @@ PegSelectView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 
 	if ((transit == B_EXITED_VIEW) and fMouseDown)
 	{
-
 		fMouseDown = false;
 		SetMouseEventMask(B_NO_POINTER_HISTORY);
 
 		BMessage drag_message(PV_DRAG_PEG);
-		drag_message.AddUInt8("color", fDraggedPegNr );
+		drag_message.AddUInt8("color_index", fPegs[fDraggedPegNr]->GetColorIndex());
 		BBitmap *drag_bitmap = new BBitmap(fPegs[fDraggedPegNr]->GetBitmap()); //copy the bitmap from the peg
 		DragMessage(&drag_message, drag_bitmap, BPoint(20,20));				   //because it is deleted by the d&d system
-
 	}
 
 
