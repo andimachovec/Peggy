@@ -30,6 +30,24 @@ PegSelectView::PegSelectView()
 
 
 void
+PegSelectView::MessageReceived(BMessage *msg)
+{
+
+	switch (msg->what)
+	{
+		case PV_DRAG_PEG:  	// do nothing, just prevent an error message for unhandled BMessages
+			break;			// to appear on stderr
+
+		default:
+			BView::MessageReceived(msg);
+			break;
+	}
+
+}
+
+
+
+void
 PegSelectView::Draw(BRect updateRect)
 {
 

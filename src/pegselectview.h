@@ -16,6 +16,7 @@ class PegSelectView : public BView {
 public:
 	PegSelectView();
 	void Draw(BRect updateRect);
+	void MessageReceived(BMessage *msg);
 	void LayoutChanged();
 	void MouseDown(BPoint point);
 	void MouseUp(BPoint point);
