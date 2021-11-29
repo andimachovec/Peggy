@@ -27,3 +27,20 @@ ButtonView::ButtonView()
 }
 
 
+void
+ButtonView::EnableButton()
+{
+
+	fSubmitRowButton->SetEnabled(true);
+
+}
+
+
+void
+ButtonView::DisableButton()
+{
+
+	fSubmitRowButton->SetEnabled(false);
+
+}
+

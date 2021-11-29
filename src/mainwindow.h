@@ -14,6 +14,7 @@
 class BoardView;
 class PegSelectView;
 class ButtonView;
+class GameController;
 
 
 enum
@@ -34,6 +35,7 @@ private:
 	BoardView			*fBoardView;
 	PegSelectView		*fPegSelectView;
 	ButtonView			*fButtonView;
+	GameController		*fGameController;
 };
 
 #endif

@@ -15,6 +15,8 @@ enum
 class ButtonView : public BView {
 public:
 	ButtonView();
+	void EnableButton();
+	void DisableButton();
 
 private:
 	BButton *fSubmitRowButton;

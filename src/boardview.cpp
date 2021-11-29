@@ -1,5 +1,6 @@
 #include "boardview.h"
 #include "pegselectview.h"
+#include <Window.h>
 #include <iostream>
 
 
@@ -97,6 +98,7 @@ BoardView::MessageReceived(BMessage *msg)
 				{
 					fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
 					Invalidate();
+					check_row();
 				}
 			}
 
@@ -139,7 +141,8 @@ BoardView::MessageReceived(BMessage *msg)
 			}
 
 			Invalidate();
-
+			check_row();
+			break;
 		}
 
 		default:
@@ -234,6 +237,7 @@ BoardView::MouseDown(BPoint point)
 			{
 				fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(0); 	//set peg color to board color,
 				Invalidate();											//visually removing the peg
+				check_row();
 			}
 		}
 	}
@@ -284,7 +288,7 @@ BoardView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 		fRows[fActiveRow]->GetColorPeg(fDraggedPegNr)->SetColorIndex(0);
 		Invalidate();
 		DragMessage(&drag_message, drag_bitmap, BPoint(20,20));
-
+		check_row();
 	}
 
 }
@@ -317,3 +321,35 @@ BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
 	return false;
 }
 
+
+bool
+BoardView::row_complete()
+{
+
+	for (uint8 i = 0; i < 4; ++i)
+	{
+		if (fRows[fActiveRow]->GetColorPeg(i)->GetColorIndex() == 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+
+void
+BoardView::check_row()
+{
+
+	if (row_complete())
+	{
+		Window()->PostMessage(new BMessage(BV_ROW_COMPLETE));
+	}
+	else
+	{
+		Window()->PostMessage(new BMessage(BV_ROW_INCOMPLETE));
+	}
+
+}

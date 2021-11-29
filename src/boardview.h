@@ -9,6 +9,8 @@
 
 enum {
 	BV_DRAG_PEG = 'bv00',
+	BV_ROW_COMPLETE,
+	BV_ROW_INCOMPLETE,
 };
 
 
@@ -39,6 +41,8 @@ public:
 
 private:
 	bool over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr);
+	bool row_complete();
+	void check_row();
 
 	std::array<BoardRow*, 9> fRows;
 	float 	fColorPegRadius;
