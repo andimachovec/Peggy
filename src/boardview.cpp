@@ -205,13 +205,14 @@ BoardView::MouseDown(BPoint point)
 
 	GetMouse(&location, &buttons);
 
+	//check if right mouse button was clicked over a peg in the active row -> used for removing pegs
 	if (buttons == B_SECONDARY_MOUSE_BUTTON)
 	{
 		uint8 row_nr, hole_nr;
 
-		if (over_hole(location, row_nr, hole_nr))
+		if (over_hole(point, row_nr, hole_nr))
 		{
-			if (row_nr == fActiveRow) //only continue if peg was dropped in the currently played row
+			if (row_nr == fActiveRow) //only continue if in the currently active row
 			{
 				fRows[row_nr]->GetColorPeg(hole_nr)->SetColor(54, 34, 4);
 				Invalidate();
