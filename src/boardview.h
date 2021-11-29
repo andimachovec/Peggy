@@ -27,6 +27,7 @@ public:
 	void MessageReceived(BMessage *msg);
 	void Draw(BRect updateRect);
 	void LayoutChanged();
+	void MouseDown(BPoint point);
 	void SetActiveRow(uint8 row_nr);
 
 private:
