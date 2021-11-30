@@ -1,6 +1,9 @@
 #include "boardview.h"
 #include "pegselectview.h"
 #include <Window.h>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
 #include <iostream>
 
 
@@ -63,6 +66,9 @@ BoardView::BoardView()
 
 	fActiveRow = 0;
 	fMouseDown = false;
+
+	init_combination();
+
 }
 
 
@@ -210,10 +216,6 @@ BoardView::LayoutChanged()
 		peg_center.y=peg_center.y-delta_y-2*fColorPegRadius;
 	}
 
-	//only for color contrast testing -> remove when colors are OK
-	fRows[3]->GetResultPeg(1)->SetColorIndex(1);
-	fRows[3]->GetResultPeg(2)->SetColorIndex(2);
-
 }
 
 
@@ -303,6 +305,98 @@ BoardView::SetActiveRow(uint8 row_nr)
 }
 
 
+void
+BoardView::EvaluateActiveRow()
+{
+
+	uint8 black = 0;
+	uint8 white = 0;
+
+	combination_t chk_combination;  // the combination to be guessed
+	combination_t chk_guess;		// current guess
+
+	//Fill the work arrays with the values from the game
+	for (int i=0; i<4; ++i)
+	{
+		chk_combination[i]=fCombination[i];
+		chk_guess[i]=fRows[fActiveRow]->GetColorPeg(i)->GetColorIndex();
+	}
+
+
+	//debug output
+	std::cout << "combi:";
+	for (int i=0; i<4; ++i)
+	{
+		std::cout << " " << static_cast<int>(chk_combination[i]);
+	}
+	std::cout << std::endl;
+
+	std::cout << "guess:";
+	for (int i=0; i<4; ++i)
+	{
+		std::cout << " " << static_cast<int>(chk_guess[i]);
+	}
+	std::cout << std::endl;
+
+
+	// check for black pegs and mark the places with -1
+	for (int counter1=0; counter1<4; ++counter1)
+	{
+		if (chk_guess[counter1] == chk_combination[counter1] )
+		{
+			++black;
+			chk_guess[counter1]=-1;
+			chk_combination[counter1]=-1;
+		}
+	}
+
+	//check for white pegs
+	for (int counter1=0; counter1<4; ++counter1)
+	{
+		if (chk_guess[counter1] != -1)
+		{
+			for (int counter2=0; counter2<4; ++counter2)
+			{
+				if (chk_guess[counter1] == chk_combination[counter2])
+				{
+					++white;
+					chk_combination[counter2]=-1;
+					counter2=4;
+				}
+			}
+		}
+	}
+
+
+	//debug output
+	std::cout << "black: " << static_cast<int>(black) << std::endl;
+	std::cout << "white: " << static_cast<int>(white) << std::endl;
+
+
+
+	// set result pegs
+	for (uint8 result_pos = 0; result_pos < black; ++result_pos)
+	{
+		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(1);
+	}
+
+	for (uint8 result_pos = black; result_pos < black+white; ++result_pos)
+	{
+		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(2);
+	}
+
+	Invalidate();
+
+	// continue to next row unless the guess is right or we are at the last row
+	if ((black < 4) and (fActiveRow < 8))
+	{
+		++fActiveRow;
+	}
+
+}
+
+
+
 bool
 BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
 {
@@ -353,3 +447,21 @@ BoardView::check_row()
 	}
 
 }
+
+
+void
+BoardView::init_combination()
+{
+
+	int counter;
+	srand(time(NULL));
+
+	for (counter=0; counter<=3; counter++)
+	{
+		fCombination[counter]=(rand() % 6)+3;
+	}
+
+}
+
+
+

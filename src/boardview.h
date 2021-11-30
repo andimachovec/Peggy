@@ -7,6 +7,9 @@
 #include "peg.h"
 
 
+typedef std::array<int8, 4> combination_t;
+
+
 enum {
 	BV_DRAG_PEG = 'bv00',
 	BV_ROW_COMPLETE,
@@ -38,19 +41,21 @@ public:
 	void MouseUp(BPoint point);
 	void MouseMoved(BPoint point, uint32 transit, const BMessage* message);
 	void SetActiveRow(uint8 row_nr);
+	void EvaluateActiveRow();
 
 private:
 	bool over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr);
 	bool row_complete();
 	void check_row();
+	void init_combination();
 
-	std::array<BoardRow*, 9> fRows;
-	float 	fColorPegRadius;
-	float 	fResultPegRadius;
-	uint8	fActiveRow;
-	bool fMouseDown;
-	uint8 fDraggedPegNr;
-
+	std::array<BoardRow*, 9> 	fRows;
+	float 						fColorPegRadius;
+	float 						fResultPegRadius;
+	uint8						fActiveRow;
+	bool 						fMouseDown;
+	uint8 						fDraggedPegNr;
+	combination_t				fCombination;
 };
 
 

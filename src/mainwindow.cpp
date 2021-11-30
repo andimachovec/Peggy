@@ -7,7 +7,6 @@
 #include "boardview.h"
 #include "pegselectview.h"
 #include "buttonview.h"
-#include "gamecontroller.h"
 
 #include <Alert.h>
 #include <LayoutBuilder.h>
@@ -56,16 +55,13 @@ MainWindow::MainWindow(BRect geometry)
 		.Add(fButtonView)
 	.Layout();
 
-	//initialize game controller
-	fGameController = new GameController();
-
 }
 
 
 MainWindow::~MainWindow()
 {
 
-	delete fGameController;
+
 
 }
 
@@ -86,6 +82,8 @@ MainWindow::MessageReceived(BMessage *msg)
 		case BV_SUBMITBUTTON_CLICKED:
 		{
 
+			fBoardView->EvaluateActiveRow();
+
 			break;
 		}
 
@@ -100,7 +98,6 @@ MainWindow::MessageReceived(BMessage *msg)
 			fButtonView->DisableButton();
 			break;
 		}
-
 
 		//forward all unhandled messages to the base class
 		default:

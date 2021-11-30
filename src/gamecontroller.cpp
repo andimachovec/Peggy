@@ -8,34 +8,27 @@
 GameController::GameController()
 {
 
-	//initialize GameRow objects
-	for (int i=0; i<9; ++i)
-	{
-		GameRows[i] = new GameRow();
-	}
-
 	current_row=0;
 	init_combination();
-	game_finished=false;
 
 }
 
 
 void
-GameController::EvaluateCurrentRow()
+GameController::EvaluateActiveRow(combination_t guess, int &black, int &white);
 {
 
-	int count_black=0;
-	int count_white=0;
+	black=0;
+	white=0;
 
 	combination_t chk_combination;  // the combination to be guessed
-	combination_t chk_guess;				// current guess
+	combination_t chk_guess;		// current guess
 
 	//Fill the work arrays with the values from the game
 	for (int i=0; i<4; ++i)
 	{
 		chk_combination[i]=combination[i];
-		chk_guess[i]=GetCurrentRow()->GetPegColor(i);
+		chk_guess[i]=guess[i];
 	}
 
 	// check for black pegs and mark the places with -1
@@ -43,7 +36,7 @@ GameController::EvaluateCurrentRow()
 	{
 		if (chk_guess[counter1] == chk_combination[counter1] )
 		{
-			++count_black;
+			++black;
 			chk_guess[counter1]=-1;
 			chk_combination[counter1]=-1;
 		}
@@ -58,7 +51,7 @@ GameController::EvaluateCurrentRow()
 			{
 				if (chk_guess[counter1] == chk_combination[counter2])
 				{
-					++count_white;
+					++white;
 					chk_combination[counter2]=-1;
 					counter2=4;
 				}
@@ -66,41 +59,10 @@ GameController::EvaluateCurrentRow()
 		}
 	}
 
-	//write the black and white peg numbers into the GameRow object
-	GetCurrentRow()->SetResult(count_black,count_white);
-
-	if ((count_black == 4) or (current_row == 8))
+	if ((black < 4) and (active_row < 8)
 	{
-		game_finished=true;
+		++active_row;
 	}
-
-}
-
-
-void
-GameController::NextRow()
-{
-
-	++current_row;
-
-}
-
-
-int
-GameController::GetCurrentRowNumber()
-{
-
-	return current_row;
-
-}
-
-
-GameRow*
-GameController::GetCurrentRow()
-{
-
-	return GameRows[current_row];
-
 }
 
 
@@ -117,15 +79,6 @@ GameController::init_combination()
 	}
 
 	return true;
-
-}
-
-
-bool
-GameController::IsFinished()
-{
-
-	return game_finished;
 
 }
 

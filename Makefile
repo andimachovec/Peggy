@@ -8,8 +8,6 @@ APP_MIME_SIG = application/x-vnd.BlueSky-Peggy
 #%{
 # @src->@
 SRCS = \
-	 src/gamecontroller.cpp  \
-	 src/gamerow.cpp  \
 	 src/app.cpp  \
 	 src/boardview.cpp  \
 	 src/buttonview.cpp  \
@@ -24,6 +22,10 @@ RDEFS = \
 RSRC = \
 
 # @<-src@
+#%}
+
+#%}
+
 #%}
 
 #%}
