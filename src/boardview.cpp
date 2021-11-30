@@ -196,9 +196,9 @@ BoardView::LayoutChanged()
 		//calculate result peg positions
 		float distance = fResultPegRadius*2;
 		fRows[row]->GetResultPeg(0)->SetCenter(
-			BPoint(peg_center.x+distance, peg_center.y-distance));
-		fRows[row]->GetResultPeg(1)->SetCenter(
 			BPoint(peg_center.x-distance, peg_center.y-distance));
+		fRows[row]->GetResultPeg(1)->SetCenter(
+			BPoint(peg_center.x+distance, peg_center.y-distance));
 		fRows[row]->GetResultPeg(2)->SetCenter(
 			BPoint(peg_center.x-distance, peg_center.y+distance));
 		fRows[row]->GetResultPeg(3)->SetCenter(
@@ -378,11 +378,13 @@ BoardView::EvaluateActiveRow()
 	for (uint8 result_pos = 0; result_pos < black; ++result_pos)
 	{
 		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(1);
+		std::cout << "setting black peg on position " << static_cast<int>(result_pos) << std::endl;
 	}
 
 	for (uint8 result_pos = black; result_pos < black+white; ++result_pos)
 	{
 		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(2);
+		std::cout << "setting white peg on position " << static_cast<int>(result_pos) << std::endl;
 	}
 
 	Invalidate();
