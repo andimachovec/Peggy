@@ -330,23 +330,6 @@ BoardView::EvaluateActiveRow()
 		chk_guess[i]=fRows[fActiveRow]->GetColorPeg(i)->GetColorIndex();
 	}
 
-
-	//debug output
-	std::cout << "combi:";
-	for (int i=0; i<4; ++i)
-	{
-		std::cout << " " << static_cast<int>(chk_combination[i]);
-	}
-	std::cout << std::endl;
-
-	std::cout << "guess:";
-	for (int i=0; i<4; ++i)
-	{
-		std::cout << " " << static_cast<int>(chk_guess[i]);
-	}
-	std::cout << std::endl;
-
-
 	// check for black pegs and mark the places with -1
 	for (int counter1=0; counter1<4; ++counter1)
 	{
@@ -375,24 +358,15 @@ BoardView::EvaluateActiveRow()
 		}
 	}
 
-
-	//debug output
-	std::cout << "black: " << static_cast<int>(black) << std::endl;
-	std::cout << "white: " << static_cast<int>(white) << std::endl;
-
-
-
 	// set result pegs
 	for (uint8 result_pos = 0; result_pos < black; ++result_pos)
 	{
 		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(1);
-		std::cout << "setting black peg on position " << static_cast<int>(result_pos) << std::endl;
 	}
 
 	for (uint8 result_pos = black; result_pos < black+white; ++result_pos)
 	{
 		fRows[fActiveRow]->GetResultPeg(result_pos)->SetColorIndex(2);
-		std::cout << "setting white peg on position " << static_cast<int>(result_pos) << std::endl;
 	}
 
 	Invalidate();
@@ -424,7 +398,6 @@ BoardView::EvaluateActiveRow()
 	}
 
 }
-
 
 
 bool
