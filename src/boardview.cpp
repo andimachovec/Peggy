@@ -388,6 +388,7 @@ BoardView::EvaluateActiveRow()
 	}
 
 	Invalidate();
+	Window()->PostMessage(new BMessage(BV_ROW_INCOMPLETE));
 
 	// continue to next row unless the guess is right or we are at the last row
 	if ((black < 4) and (fActiveRow < 8))
