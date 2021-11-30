@@ -1,10 +1,18 @@
 #include "boardview.h"
 #include "pegselectview.h"
+
 #include <Window.h>
+#include <Alert.h>
+#include <Catalog.h>
+
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
 #include <iostream>
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "BoardView"
 
 
 BoardRow::BoardRow(BView *target_view)
@@ -390,10 +398,29 @@ BoardView::EvaluateActiveRow()
 	Invalidate();
 	Window()->PostMessage(new BMessage(BV_ROW_INCOMPLETE));
 
-	// continue to next row unless the guess is right or we are at the last row
+	// if not guessed right and not at the last row, continue to next row
 	if ((black < 4) and (fActiveRow < 8))
 	{
 		++fActiveRow;
+	}
+
+	// guess is right
+	else if (black == 4)
+	{
+		BAlert *alert = new BAlert("",
+							B_TRANSLATE("Congratulations! You've cracked the combination"),
+							B_TRANSLATE("Close"));
+		alert->Go();
+	}
+
+	// guess isn´t right and we´re already at the last row
+	else if ((black < 4) and (fActiveRow == 8))
+	{
+		BAlert *alert = new BAlert("",
+							B_TRANSLATE("Oops! You missed your last chance to guess the combination"),
+							B_TRANSLATE("Close"));
+
+		alert->Go();
 	}
 
 }
