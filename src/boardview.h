@@ -56,6 +56,7 @@ private:
 	bool 						fMouseDown;
 	uint8 						fDraggedPegNr;
 	combination_t				fCombination;
+	bool						fGameOver;
 };
 
 

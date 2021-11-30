@@ -74,9 +74,10 @@ BoardView::BoardView()
 
 	fActiveRow = 0;
 	fMouseDown = false;
-
+	fGameOver = false;
+	
 	init_combination();
-
+	
 }
 
 
@@ -97,25 +98,28 @@ BoardView::MessageReceived(BMessage *msg)
 	{
 		case PV_DRAG_PEG:	// color peg is dropped from the selection view
 		{
-			// get color and drop point
-			uint8 color_index;
-			msg->FindUInt8("color_index", &color_index);
-			BPoint drop_point;
-			msg->FindPoint("_drop_point_", &drop_point);
-			drop_point = ConvertFromScreen(drop_point);  // drop point comes in screen coordinates
-
-			// check in which hole the peg was dropped
-			uint8 row_nr, hole_nr;
-			if (over_hole(drop_point, row_nr, hole_nr))
+			if (!fGameOver)
 			{
-				if (row_nr == fActiveRow) // only continue if peg was dropped in the currently played row
+				// get color and drop point
+				uint8 color_index;
+				msg->FindUInt8("color_index", &color_index);
+				BPoint drop_point;
+				msg->FindPoint("_drop_point_", &drop_point);
+				drop_point = ConvertFromScreen(drop_point);  // drop point comes in screen coordinates
+
+				// check in which hole the peg was dropped
+				uint8 row_nr, hole_nr;
+				if (over_hole(drop_point, row_nr, hole_nr))
 				{
-					fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
-					Invalidate();
-					check_row();
+					if (row_nr == fActiveRow) // only continue if peg was dropped in the currently played row
+					{
+						fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(color_index);
+						Invalidate();
+						check_row();
+					}
 				}
 			}
-
+			
 			break;
 		}
 
@@ -237,37 +241,40 @@ BoardView::MouseDown(BPoint point)
 	GetMouse(&location, &buttons);
 
 	//check if right mouse button was clicked over a peg in the active row -> used for removing pegs
-	if (buttons == B_SECONDARY_MOUSE_BUTTON)
-	{
-		uint8 row_nr, hole_nr;
-
-		if (over_hole(point, row_nr, hole_nr))
+	if (!fGameOver)
+	{	
+		if (buttons == B_SECONDARY_MOUSE_BUTTON)
 		{
-			if (row_nr == fActiveRow) //only continue if in the currently active row
+			uint8 row_nr, hole_nr;
+
+			if (over_hole(point, row_nr, hole_nr))
 			{
-				fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(0); 	//set peg color to board color,
-				Invalidate();											//visually removing the peg
-				check_row();
+				if (row_nr == fActiveRow) //only continue if in the currently active row
+				{
+					fRows[row_nr]->GetColorPeg(hole_nr)->SetColorIndex(0); 	//set peg color to board color,
+					Invalidate();											//visually removing the peg
+					check_row();
+				}
 			}
 		}
-	}
 
-	else if (buttons == B_PRIMARY_MOUSE_BUTTON)
-	{
-
-		uint8 row_nr, hole_nr;
-
-		if (over_hole(point, row_nr, hole_nr))
+		else if (buttons == B_PRIMARY_MOUSE_BUTTON)
 		{
-			//only continue if in the currently active row and the hole isn´t empty
-			if ((row_nr == fActiveRow)and (fRows[fActiveRow]->GetColorPeg(hole_nr)->GetColorIndex() != 0))
+
+			uint8 row_nr, hole_nr;
+
+			if (over_hole(point, row_nr, hole_nr))
 			{
-				SetMouseEventMask(B_FULL_POINTER_HISTORY);
-				fMouseDown = true;
-				fDraggedPegNr = hole_nr;
+				//only continue if in the currently active row and the hole isn´t empty
+				if ((row_nr == fActiveRow)and (fRows[fActiveRow]->GetColorPeg(hole_nr)->GetColorIndex() != 0))
+				{
+					SetMouseEventMask(B_FULL_POINTER_HISTORY);
+					fMouseDown = true;
+					fDraggedPegNr = hole_nr;
+				}
 			}
 		}
-	}
+	}	
 }
 
 
@@ -285,7 +292,7 @@ void
 BoardView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 {
 
-	if ((transit == B_INSIDE_VIEW) and fMouseDown)
+	if ((transit == B_INSIDE_VIEW) and fMouseDown and !fGameOver)
 	{
 		fMouseDown = false;
 		SetMouseEventMask(B_NO_POINTER_HISTORY);
@@ -381,6 +388,7 @@ BoardView::EvaluateActiveRow()
 	// guess is right
 	else if (black == 4)
 	{
+		fGameOver = true;
 		BAlert *alert = new BAlert("",
 							B_TRANSLATE("Congratulations! You've cracked the combination"),
 							B_TRANSLATE("Close"));
@@ -390,6 +398,7 @@ BoardView::EvaluateActiveRow()
 	// guess isn´t right and we´re already at the last row
 	else if ((black < 4) and (fActiveRow == 8))
 	{
+		fGameOver = true;	
 		BAlert *alert = new BAlert("",
 							B_TRANSLATE("Oops! You missed your last chance to guess the combination"),
 							B_TRANSLATE("Close"));
