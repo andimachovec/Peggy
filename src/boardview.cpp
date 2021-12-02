@@ -75,9 +75,9 @@ BoardView::BoardView()
 	fActiveRow = 0;
 	fMouseDown = false;
 	fGameOver = false;
-	
+
 	init_combination();
-	
+
 }
 
 
@@ -119,7 +119,7 @@ BoardView::MessageReceived(BMessage *msg)
 					}
 				}
 			}
-			
+
 			break;
 		}
 
@@ -242,7 +242,7 @@ BoardView::MouseDown(BPoint point)
 
 	//check if right mouse button was clicked over a peg in the active row -> used for removing pegs
 	if (!fGameOver)
-	{	
+	{
 		if (buttons == B_SECONDARY_MOUSE_BUTTON)
 		{
 			uint8 row_nr, hole_nr;
@@ -274,7 +274,7 @@ BoardView::MouseDown(BPoint point)
 				}
 			}
 		}
-	}	
+	}
 }
 
 
@@ -398,12 +398,16 @@ BoardView::EvaluateActiveRow()
 	// guess isn´t right and we´re already at the last row
 	else if ((black < 4) and (fActiveRow == 8))
 	{
-		fGameOver = true;	
+		fGameOver = true;
+
 		BAlert *alert = new BAlert("",
 							B_TRANSLATE("Oops! You missed your last chance to guess the combination"),
 							B_TRANSLATE("Close"));
 
+		BBitmap *combi_bitmap = get_combination_bitmap();
+		alert->SetIcon(combi_bitmap);
 		alert->Go();
+		delete combi_bitmap;
 	}
 
 }
@@ -476,4 +480,54 @@ BoardView::init_combination()
 }
 
 
+BBitmap*
+BoardView::get_combination_bitmap()
+{
+
+	// create bitmap, view and pegs
+	BRect combi_bitmap_dimensions(0, 0, fColorPegRadius*8+25, fColorPegRadius*2+5);
+	BBitmap *combi_bitmap = new BBitmap(combi_bitmap_dimensions, B_RGBA32, true);
+	BView	*combi_bitmap_view = new BView(	combi_bitmap_dimensions,
+											"combibitmapview",
+											B_FOLLOW_NONE,B_WILL_DRAW);
+
+	combi_bitmap->AddChild(combi_bitmap_view);
+
+	std::array<Peg*, 4> combi_pegs;
+	BPoint peg_center;
+	peg_center.x=5+fColorPegRadius;
+	peg_center.y=combi_bitmap_dimensions.Height()/2;
+
+	for (int i = 0; i < 4; ++i)
+	{
+		combi_pegs[i] = new Peg(combi_bitmap_view, peg_center, fColorPegRadius, fCombination[i]);
+		peg_center.x+=5+fColorPegRadius*2;
+	}
+
+	// draw pegs
+	combi_bitmap_view->LockLooper();
+	combi_bitmap_view->SetLowColor(0,0,0,0); //transparent
+	combi_bitmap_view->FillRect(combi_bitmap_dimensions, B_SOLID_LOW);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		combi_pegs[i]->Draw();
+	}
+
+	combi_bitmap_view->Sync();
+	combi_bitmap_view->UnlockLooper();
+
+	// cleanup
+	combi_bitmap->RemoveChild(combi_bitmap_view);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		delete combi_pegs[i];
+	}
+
+	delete combi_bitmap_view;
+
+	return combi_bitmap;
+
+}
 

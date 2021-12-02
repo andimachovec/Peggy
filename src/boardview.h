@@ -3,6 +3,8 @@
 
 
 #include <View.h>
+#include <Bitmap.h>
+
 #include <array>
 #include "peg.h"
 
@@ -48,6 +50,7 @@ private:
 	bool row_complete();
 	void check_row();
 	void init_combination();
+	BBitmap* get_combination_bitmap();
 
 	std::array<BoardRow*, 9> 	fRows;
 	float 						fColorPegRadius;
