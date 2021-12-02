@@ -10,6 +10,22 @@ Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 	fColorIndex(color_index)
 {
 
+	//	initialize peg colors
+	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
+
+	// for the result pegs
+	fColors[1].set_to(0,0,0);		// black
+	fColors[2].set_to(255,255,255);	// white
+
+	// for the color pegs
+	fColors[3].set_to(255,0,0); 	// red
+	fColors[4].set_to(0,255,0);		// green
+	fColors[5].set_to(0,0,255);		// blue
+	fColors[6].set_to(255,255,0);	// yellow
+	fColors[7].set_to(255,0,255);	// magenta
+	fColors[8].set_to(255,179,71);	// orange
+
+	//create bitmap for drag and drop
 	fBitmap = new BBitmap(BRect(0,0,40,40), B_RGBA32, true);
 	create_bitmap();
 
@@ -28,21 +44,6 @@ Peg::Draw()
 void
 Peg::SetCenter(BPoint center)
 {
-
-	//	initialize peg colors
-	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
-
-	// for the result pegs
-	fColors[1].set_to(0,0,0);		// black
-	fColors[2].set_to(255,255,255);		// white
-
-	// for the color pegs
-	fColors[3].set_to(255,0,0); 	// red
-	fColors[4].set_to(0,255,0);		// green
-	fColors[5].set_to(0,0,255);		// blue
-	fColors[6].set_to(255,255,0);	// yellow
-	fColors[7].set_to(255,0,255);	// magenta
-	fColors[8].set_to(255,179,71);	// orange
 
 	fCenter = center;
 	create_bitmap();
