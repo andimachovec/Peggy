@@ -44,6 +44,7 @@ public:
 	void MouseMoved(BPoint point, uint32 transit, const BMessage* message);
 	void SetActiveRow(uint8 row_nr);
 	void EvaluateActiveRow();
+	void Reset();
 
 private:
 	bool over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr);

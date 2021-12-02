@@ -413,6 +413,27 @@ BoardView::EvaluateActiveRow()
 }
 
 
+void
+BoardView::Reset()
+{
+
+	//clear out all pegs
+	for (int row = 0; row < 9; ++row)
+	{
+		for (int pos = 0; pos < 4; ++pos)
+		{
+			fRows[row]->GetColorPeg(pos)->SetColorIndex(0);
+			fRows[row]->GetResultPeg(pos)->SetColorIndex(0);
+		}
+	}
+
+	Invalidate();
+
+	init_combination();
+	fActiveRow = 0;
+	fGameOver = false;
+}
+
 bool
 BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
 {
