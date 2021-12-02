@@ -35,6 +35,7 @@ MainWindow::MainWindow(BRect geometry)
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
 		.AddMenu(B_TRANSLATE("File"))
+			.AddItem(B_TRANSLATE("New Game"), MW_MENU_NEWGAME, 'N')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Quit"), B_QUIT_REQUESTED, 'Q')
 		.End()
@@ -76,6 +77,12 @@ MainWindow::MessageReceived(BMessage *msg)
 		case MW_MENU_ABOUT:
 		{
 			be_app->PostMessage(B_ABOUT_REQUESTED);
+			break;
+		}
+
+		case MW_MENU_NEWGAME:
+		{
+			fBoardView->Reset();
 			break;
 		}
 

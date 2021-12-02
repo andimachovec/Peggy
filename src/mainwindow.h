@@ -20,6 +20,7 @@ class GameController;
 enum
 {
 	MW_MENU_ABOUT ='mw00',
+	MW_MENU_NEWGAME,
 };
 
 
