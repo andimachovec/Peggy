@@ -9,9 +9,13 @@
 
 class Peg {
 public:
+	Peg();
 	Peg(BView *target, BPoint center, float radius, uint8 color_index);
+	~Peg();
 	void Draw();
+	void SetTarget(BView *target);
 	void SetCenter(BPoint center);
+	void SetRadius(float radius);
 	void SetColorIndex(uint8 color_index);
 	uint8 GetColorIndex();
 	bool Contains(BPoint point);
@@ -20,6 +24,7 @@ public:
 private:
 	void create_bitmap();
 	void draw_peg(BView *drawing_view, BPoint center);
+	void init_colors();
 
 	BView *fTarget;
 	BPoint fCenter;

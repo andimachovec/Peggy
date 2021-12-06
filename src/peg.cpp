@@ -2,6 +2,20 @@
 #include <cmath>
 
 
+Peg::Peg()
+	:
+	fTarget(nullptr),
+	fCenter(BPoint(0,0)),
+	fRadius(0),
+	fColorIndex(0)
+{
+
+	init_colors();
+	fBitmap = new BBitmap(BRect(0,0,40,40), B_RGBA32, true);
+
+}
+
+
 Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 	:
 	fTarget(target),
@@ -10,20 +24,7 @@ Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 	fColorIndex(color_index)
 {
 
-	//	initialize peg colors
-	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
-
-	// for the result pegs
-	fColors[1].set_to(0,0,0);		// black
-	fColors[2].set_to(255,255,255);	// white
-
-	// for the color pegs
-	fColors[3].set_to(255,0,0); 	// red
-	fColors[4].set_to(0,255,0);		// green
-	fColors[5].set_to(0,0,255);		// blue
-	fColors[6].set_to(255,255,0);	// yellow
-	fColors[7].set_to(255,0,255);	// magenta
-	fColors[8].set_to(255,179,71);	// orange
+	init_colors();
 
 	//create bitmap for drag and drop
 	fBitmap = new BBitmap(BRect(0,0,40,40), B_RGBA32, true);
@@ -31,6 +32,13 @@ Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 
 }
 
+
+Peg::~Peg()
+{
+
+	delete fBitmap;
+
+}
 
 void
 Peg::Draw()
@@ -42,12 +50,29 @@ Peg::Draw()
 
 
 void
+Peg::SetTarget(BView *target)
+{
+
+	fTarget = target;
+
+}
+
+void
 Peg::SetCenter(BPoint center)
 {
 
 	fCenter = center;
 	create_bitmap();
 
+}
+
+
+void
+Peg::SetRadius(float radius)
+{
+
+	fRadius = radius;
+	create_bitmap();
 }
 
 
@@ -68,8 +93,6 @@ Peg::GetColorIndex()
 	return fColorIndex;
 
 }
-
-
 
 
 bool
@@ -140,4 +163,30 @@ Peg::draw_peg(BView *drawing_view, BPoint center)
 	drawing_view->SetHighColor(temp_color);
 
 }
+
+
+void
+Peg::init_colors()
+{
+
+	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
+
+	// for the result pegs
+	fColors[1].set_to(0,0,0);		// black
+	fColors[2].set_to(255,255,255);	// white
+
+	// for the color pegs
+	fColors[3].set_to(255,0,0); 	// red
+	fColors[4].set_to(0,255,0);		// green
+	fColors[5].set_to(0,0,255);		// blue
+	fColors[6].set_to(255,255,0);	// yellow
+	fColors[7].set_to(255,0,255);	// magenta
+	fColors[8].set_to(255,179,71);	// orange
+
+}
+
+
+
+
+
 
