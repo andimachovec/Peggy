@@ -40,7 +40,7 @@ TimerView::Pulse()
 		seconds_string.SetToFormat("%02d", fSeconds);
 
 		BString time_string;
-		time_string << minutes_string << ":" << seconds_string;
+		time_string << B_TRANSLATE("Time elapsed") << ": " << minutes_string << ":" << seconds_string;
 
 		SetText(time_string.String());
 	}
@@ -54,7 +54,9 @@ TimerView::StartTimer()
 
 	fMinutes = 0;
 	fSeconds = 0;
-	SetText("00:00");
+	BString time_string;
+	time_string << B_TRANSLATE("Time elapsed") << ": 00:00";
+	SetText(time_string.String());
 	fRunning = true;
 
 }
