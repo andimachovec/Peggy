@@ -14,6 +14,7 @@ SRCS = \
 	 src/mainwindow.cpp  \
 	 src/peg.cpp  \
 	 src/pegselectview.cpp  \
+	 src/timerview.cpp  \
 
 RDEFS = \
 	 Peggy.rdef  \
@@ -22,6 +23,8 @@ RDEFS = \
 RSRC = \
 
 # @<-src@
+#%}
+
 #%}
 
 #%}
