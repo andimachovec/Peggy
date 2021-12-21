@@ -1,9 +1,16 @@
+/*
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
+ * All rights reserved. Distributed under the terms of the MIT license.
+ *
+ */
+
 #ifndef PEG_H
 #define PEG_H
 
 
 #include <View.h>
 #include <Bitmap.h>
+
 #include <array>
 
 

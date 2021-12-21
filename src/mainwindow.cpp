@@ -1,8 +1,9 @@
 /*
- * Copyright 2019-2021 Andi Machovec <andi.machovec@gmail.com>
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  *
  */
+
 #include "mainwindow.h"
 #include "boardview.h"
 #include "pegselectview.h"
@@ -13,7 +14,6 @@
 #include <LayoutBuilder.h>
 #include <Catalog.h>
 #include <Application.h>
-#include <iostream>
 
 
 #undef B_TRANSLATION_CONTEXT

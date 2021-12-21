@@ -1,14 +1,17 @@
+/*
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
+ * All rights reserved. Distributed under the terms of the MIT license.
+ *
+ */
+
 #include "pegselectview.h"
 #include "peg.h"
-#include <iostream>
 
 
 PegSelectView::PegSelectView()
 	:
 	BView("pegselectview", B_SUPPORTS_LAYOUT|B_WILL_DRAW|B_FULL_UPDATE_ON_RESIZE)
 {
-
-
 
 	//initialize pegs
 	fPegRadius = 20;

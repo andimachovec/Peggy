@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Andi Machovec <andi.machovec@gmail.com>
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  *
  */
@@ -90,7 +90,7 @@ App::AboutRequested()
 	extra_info.Append(code_contributors);
 	extra_info.Append("\n");
 	extra_info.Append(translators);
-	*/ 
+	*/
 
 	BResources *appresource = BApplication::AppResources();
 	size_t size;
@@ -128,7 +128,7 @@ App::QuitRequested()
 
 	delete settings_file;
 	return true;
-	
+
 }
 
 

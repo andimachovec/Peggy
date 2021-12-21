@@ -1,3 +1,9 @@
+/*
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
+ * All rights reserved. Distributed under the terms of the MIT license.
+ *
+ */
+
 #ifndef BOARDVIEW_H
 #define BOARDVIEW_H
 
@@ -6,6 +12,7 @@
 #include <Bitmap.h>
 
 #include <array>
+
 #include "peg.h"
 
 

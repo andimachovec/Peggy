@@ -1,3 +1,9 @@
+/*
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
+ * All rights reserved. Distributed under the terms of the MIT license.
+ *
+ */
+
 #include "boardview.h"
 #include "pegselectview.h"
 
@@ -8,7 +14,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
-#include <iostream>
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -213,7 +218,6 @@ BoardView::LayoutChanged()
 
 	for(int row = 0; row < 9 ; ++row)
 	{
-		//std::cout << "Row " << row << std::endl;
 		peg_center.x = delta_x+fColorPegRadius;
 
 		//calculate result peg positions

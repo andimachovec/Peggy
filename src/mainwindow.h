@@ -1,8 +1,9 @@
 /*
- * Copyright 2019-2021 Andi Machovec <andi.machovec@gmail.com>
+ * Copyright 2021 Andi Machovec <andi.machovec@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  *
  */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
