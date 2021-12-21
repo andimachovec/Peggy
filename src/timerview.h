@@ -2,15 +2,13 @@
 #define TIMERVIEW_H
 
 
-#include <View.h>
 #include <TextView.h>
 
 
-class TimerView : public BView {
+class TimerView : public BTextView {
 public:
 	TimerView();
 	void Pulse();
-	void Draw(BRect updateRect);
 	void StartTimer();
 	void StopTimer();
 
@@ -18,7 +16,6 @@ private:
 	int32 		fMinutes;
 	int32 		fSeconds;
 	bool 		fRunning;
-	BTextView	*fTextView;
 };
 
 
