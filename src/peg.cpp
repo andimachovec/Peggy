@@ -169,7 +169,7 @@ void
 Peg::init_colors()
 {
 
-	fColors[0].set_to(54, 34, 4);	// board_color (pseudo transparent)
+	fColors[0].set_to(71, 45, 6);	// board_color (pseudo transparent)
 
 	// for the result pegs
 	fColors[1].set_to(0,0,0);		// black

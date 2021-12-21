@@ -43,10 +43,10 @@ MainWindow::MainWindow(BRect geometry)
 	.End();
 
 	//define main layout
-	BLayoutBuilder::Group<>(this, B_VERTICAL,0)
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.SetInsets(0)
 		.Add(fTopMenuBar)
-		.AddGroup(B_HORIZONTAL)
+		.AddGroup(B_HORIZONTAL, 0)
 			.Add(fBoardView,5)
 			.Add(fPegSelectView)
 		.End()

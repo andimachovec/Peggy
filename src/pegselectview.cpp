@@ -40,10 +40,12 @@ PegSelectView::MessageReceived(BMessage *msg)
 }
 
 
-
 void
 PegSelectView::Draw(BRect updateRect)
 {
+
+	SetLowColor(110, 62, 28);
+	FillRect(updateRect, B_SOLID_LOW);
 
 	for(int i = 0; i < 6; ++i)
 	{
