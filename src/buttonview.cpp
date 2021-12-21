@@ -6,7 +6,7 @@
 
 
 #undef B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT "MessageView"
+#define B_TRANSLATION_CONTEXT "ButtonView"
 
 
 ButtonView::ButtonView()
