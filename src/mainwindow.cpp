@@ -82,6 +82,24 @@ MainWindow::MessageReceived(BMessage *msg)
 
 		case MW_MENU_NEWGAME:
 		{
+			if (fBoardView->GameRunning())
+			{
+				BAlert *newgame_alert = new BAlert(
+					"",
+					B_TRANSLATE("A game is still in progress. Do you really want to start a new one?"),
+					B_TRANSLATE("Start New Game"),
+					B_TRANSLATE("Keep Playing"),
+					NULL,
+					B_WIDTH_AS_USUAL,
+					B_INFO_ALERT);
+
+				int32 button_index = newgame_alert->Go();
+				if (button_index != 0)
+				{
+					break;
+				}
+			}
+
 			fBoardView->Reset();
 			break;
 		}
