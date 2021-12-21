@@ -66,10 +66,14 @@ BoardView::BoardView()
 	fColorPegRadius = 20;
 	fResultPegRadius = 5;
 
-	//initialize rows
 	for(int i = 0; i < 9 ; ++i)
 	{
 		fRows[i] = new BoardRow(this);
+	}
+
+	for(int i = 0; i < 4; ++i)
+	{
+		fCombiPegs[i] = new Peg(this, BPoint(), 20, 0);
 	}
 
 	fActiveRow = 0;
@@ -83,10 +87,17 @@ BoardView::BoardView()
 
 BoardView::~BoardView()
 {
+
 	for(int i = 0; i < 9 ; ++i)
 	{
 		delete fRows[i];
 	}
+
+	for(int i = 0; i < 4; ++i)
+	{
+		delete fCombiPegs[i];
+	}
+
 }
 
 
@@ -404,10 +415,8 @@ BoardView::EvaluateActiveRow()
 							B_TRANSLATE("Oops! You missed your last chance to guess the combination"),
 							B_TRANSLATE("Close"));
 
-		BBitmap *combi_bitmap = get_combination_bitmap();
-		alert->SetIcon(combi_bitmap);
+		alert->SetIcon(get_combination_bitmap());
 		alert->Go();
-		delete combi_bitmap;
 	}
 
 }
@@ -514,14 +523,16 @@ BoardView::get_combination_bitmap()
 
 	combi_bitmap->AddChild(combi_bitmap_view);
 
-	std::array<Peg*, 4> combi_pegs;
 	BPoint peg_center;
 	peg_center.x=5+fColorPegRadius;
 	peg_center.y=combi_bitmap_dimensions.Height()/2;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		combi_pegs[i] = new Peg(combi_bitmap_view, peg_center, fColorPegRadius, fCombination[i]);
+		fCombiPegs[i]->SetTarget(combi_bitmap_view);
+		fCombiPegs[i]->SetCenter(peg_center);
+		fCombiPegs[i]->SetColorIndex(fCombination[i]);
+
 		peg_center.x+=5+fColorPegRadius*2;
 	}
 
@@ -532,7 +543,7 @@ BoardView::get_combination_bitmap()
 
 	for (int i = 0; i < 4; ++i)
 	{
-		combi_pegs[i]->Draw();
+		fCombiPegs[i]->Draw();
 	}
 
 	combi_bitmap_view->Sync();
@@ -540,12 +551,6 @@ BoardView::get_combination_bitmap()
 
 	// cleanup
 	combi_bitmap->RemoveChild(combi_bitmap_view);
-
-	for (int i = 0; i < 4; ++i)
-	{
-		delete combi_pegs[i];
-	}
-
 	delete combi_bitmap_view;
 
 	return combi_bitmap;

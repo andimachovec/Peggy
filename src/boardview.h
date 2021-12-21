@@ -61,6 +61,8 @@ private:
 	uint8 						fDraggedPegNr;
 	combination_t				fCombination;
 	bool						fGameOver;
+	std::array<Peg*, 4>         fCombiPegs;
+
 };
 
 
