@@ -3,6 +3,7 @@
 
 
 #include <View.h>
+#include <TextView.h>
 
 
 class TimerView : public BView {
@@ -14,9 +15,10 @@ public:
 	void StopTimer();
 
 private:
-	int32 fMinutes;
-	int32 fSeconds;
-	bool fRunning;
+	int32 		fMinutes;
+	int32 		fSeconds;
+	bool 		fRunning;
+	BTextView	*fTextView;
 };
 
 

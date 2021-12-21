@@ -14,6 +14,7 @@
 class BoardView;
 class PegSelectView;
 class ButtonView;
+class TimerView;
 
 
 enum
@@ -35,6 +36,7 @@ private:
 	BoardView			*fBoardView;
 	PegSelectView		*fPegSelectView;
 	ButtonView			*fButtonView;
+	TimerView			*fTimerView;
 
 };
 

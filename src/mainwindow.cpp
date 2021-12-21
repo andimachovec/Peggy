@@ -7,6 +7,7 @@
 #include "boardview.h"
 #include "pegselectview.h"
 #include "buttonview.h"
+#include "timerview.h"
 
 #include <Alert.h>
 #include <LayoutBuilder.h>
@@ -29,6 +30,7 @@ MainWindow::MainWindow(BRect geometry)
 	fBoardView = new BoardView();
 	fPegSelectView = new PegSelectView();
 	fButtonView = new ButtonView();
+	fTimerView = new TimerView();
 
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
@@ -51,7 +53,11 @@ MainWindow::MainWindow(BRect geometry)
 			.Add(fPegSelectView)
 		.End()
 		.Add(fButtonView)
+		.Add(fTimerView,0)
 	.Layout();
+
+	SetPulseRate(1000000);
+	fTimerView->StartTimer();
 
 }
 
@@ -97,7 +103,9 @@ MainWindow::MessageReceived(BMessage *msg)
 				}
 			}
 
+			fTimerView->StopTimer();
 			fBoardView->Reset();
+			fTimerView->StartTimer();
 			break;
 		}
 
@@ -105,7 +113,10 @@ MainWindow::MessageReceived(BMessage *msg)
 		{
 
 			fBoardView->EvaluateActiveRow();
-
+			if (!fBoardView->GameRunning())
+			{
+				fTimerView->StopTimer();
+			}
 			break;
 		}
 
