@@ -12,7 +12,6 @@
 #include <LayoutBuilder.h>
 #include <Catalog.h>
 #include <Application.h>
-#include <SeparatorView.h>
 #include <iostream>
 
 
@@ -30,7 +29,6 @@ MainWindow::MainWindow(BRect geometry)
 	fBoardView = new BoardView();
 	fPegSelectView = new PegSelectView();
 	fButtonView = new ButtonView();
-	BSeparatorView *main_separator = new BSeparatorView(B_VERTICAL);
 
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
@@ -50,7 +48,6 @@ MainWindow::MainWindow(BRect geometry)
 		.Add(fTopMenuBar)
 		.AddGroup(B_HORIZONTAL)
 			.Add(fBoardView,5)
-			.Add(main_separator)
 			.Add(fPegSelectView)
 		.End()
 		.Add(fButtonView)
