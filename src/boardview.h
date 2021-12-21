@@ -45,6 +45,7 @@ public:
 	void SetActiveRow(uint8 row_nr);
 	void EvaluateActiveRow();
 	void Reset();
+	bool GameRunning();
 
 private:
 	bool over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr);

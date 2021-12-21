@@ -443,6 +443,16 @@ BoardView::Reset()
 	fGameOver = false;
 }
 
+
+bool
+BoardView::GameRunning()
+{
+
+	return !fGameOver;
+
+}
+
+
 bool
 BoardView::over_hole(BPoint point, uint8 &row_nr, uint8 &hole_nr)
 {

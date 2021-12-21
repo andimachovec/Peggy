@@ -121,6 +121,24 @@ bool
 MainWindow::QuitRequested()
 {
 
+	if (fBoardView->GameRunning())
+	{
+		BAlert *quit_alert = new BAlert(
+				"",
+				B_TRANSLATE("A game is still in progress. Do you really want to quit?"),
+				B_TRANSLATE("Quit"),
+				B_TRANSLATE("Keep Playing"),
+				NULL,
+				B_WIDTH_AS_USUAL,
+				B_INFO_ALERT);
+
+		int32 button_index = quit_alert->Go();
+		if (button_index != 0)
+		{
+			return false;
+		}
+	}
+
 	be_app->PostMessage(B_QUIT_REQUESTED);
 	return true;
 
