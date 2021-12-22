@@ -1,6 +1,6 @@
 # Peggy
 
-A board game for Haiku inspired by Boggle(tm).
+A board game for Haiku inspired by Mastermind(tm).
 
 
 ![Screenshot](./screenshot.png)
