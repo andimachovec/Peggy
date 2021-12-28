@@ -219,7 +219,7 @@ BoardView::Draw(BRect updateRect)
 		marker_rect.right = right_point.x + fColorPegRadius + marker_margin;
 
 		SetHighColor(246,226,155);
-		StrokeRect(marker_rect, B_SOLID_HIGH);
+		StrokeRoundRect(marker_rect, 5, 5, B_SOLID_HIGH);
 	}
 
 }
