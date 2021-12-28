@@ -142,6 +142,14 @@ Peg::GetBitmap()
 }
 
 
+BPoint
+Peg::GetCenter()
+{
+
+	return fCenter;
+
+}
+
 void
 Peg::create_bitmap()
 {

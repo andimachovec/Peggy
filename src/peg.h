@@ -27,6 +27,7 @@ public:
 	uint8 GetColorIndex();
 	bool Contains(BPoint point);
 	BBitmap* GetBitmap();
+	BPoint GetCenter();
 
 private:
 	void create_bitmap();
