@@ -1,0 +1,16 @@
+1	English	application/x-vnd.BlueSky-Peggy	2665636730
+Help	MainWindow		Hilfe
+A game is still in progress. Do you really want to start a new one?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du wirklich ein neues Spiel beginnen?
+Keep Playing	MainWindow		Weiterspielen
+Oops! You missed your last chance to guess the combination	BoardView		Uijeh! Du hast die letzte Chance verpasst die Kombination zu erraten
+About	MainWindow		Über
+Time elapsed	TimerView		Verstrichene Zeit
+Congratulations! You've cracked the combination	BoardView		Gratuliere! Du hast die richtige Kombination erraten
+A game is still in progress. Do you really want to quit?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du das Programm wirklich beenden?
+Start New Game	MainWindow		Neues Spiel beginnen
+File	MainWindow		Datei
+New Game	MainWindow		Neues Spiel
+Close	BoardView		Schliessen
+a board game inspired by Mastermind(tm)	App		ein von Mastermind(tm) inspiriertes Brettspiel
+Quit	MainWindow		Beenden
+Complete Row	ButtonView		Reihe abschliessen
