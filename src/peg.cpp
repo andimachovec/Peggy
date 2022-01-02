@@ -157,7 +157,7 @@ Peg::create_bitmap()
 	BView *bitmap_view = new BView(BRect(0,0,40,40),"bitmapview", B_FOLLOW_NONE,B_WILL_DRAW);
 	fBitmap->AddChild(bitmap_view);
 	bitmap_view->LockLooper();
-	bitmap_view->SetLowColor(55,55,55);
+	bitmap_view->SetLowColor(0,0,0,0);	// Transparency for round pegs
 	bitmap_view->FillRect(bitmap_view->Bounds(), B_SOLID_LOW);
 	draw_peg(bitmap_view, BPoint(20,20));
 	bitmap_view->Sync();
