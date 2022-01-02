@@ -157,7 +157,7 @@ Peg::create_bitmap()
 	BView *bitmap_view = new BView(BRect(0,0,40,40),"bitmapview", B_FOLLOW_NONE,B_WILL_DRAW);
 	fBitmap->AddChild(bitmap_view);
 	bitmap_view->LockLooper();
-	bitmap_view->SetLowColor(0,0,0,0);
+	bitmap_view->SetLowColor(55,55,55);
 	bitmap_view->FillRect(bitmap_view->Bounds(), B_SOLID_LOW);
 	draw_peg(bitmap_view, BPoint(20,20));
 	bitmap_view->Sync();
@@ -187,16 +187,16 @@ Peg::init_colors()
 	fColors[0].set_to(71, 45, 6);	// board_color (pseudo transparent)
 
 	// for the result pegs
-	fColors[1].set_to(0,0,0);		// black
-	fColors[2].set_to(255,255,255);	// white
+	fColors[1].set_to(55,55,55);	// black
+	fColors[2].set_to(244,244,244);	// white
 
 	// for the color pegs
-	fColors[3].set_to(255,0,0); 	// red
-	fColors[4].set_to(0,255,0);		// green
-	fColors[5].set_to(0,0,255);		// blue
-	fColors[6].set_to(255,255,0);	// yellow
-	fColors[7].set_to(255,0,255);	// magenta
-	fColors[8].set_to(255,179,71);	// orange
+	fColors[3].set_to(255,35,6); 	// red
+	fColors[4].set_to(67,174,57);	// green
+	fColors[5].set_to(51,102,172);	// blue
+	fColors[6].set_to(255,211,0);	// yellow
+	fColors[7].set_to(214,43,245);	// magenta
+	fColors[8].set_to(255,118,0);	// orange
 
 }
 
