@@ -1,0 +1,16 @@
+1	English	application/x-vnd.BlueSky-Peggy	2665636730
+Help	MainWindow		Help
+A game is still in progress. Do you really want to start a new one?	MainWindow		Een spel is nog bezig. Ben je zeker dat je opnieuw wil beginnen?
+Keep Playing	MainWindow		Verder spelen
+Oops! You missed your last chance to guess the combination	BoardView		Oops! Je miste de laatste kans om de combinatie te vinden
+About	MainWindow		Over
+Time elapsed	TimerView		Tijd verstreken
+Congratulations! You've cracked the combination	BoardView		Gefeliciteerd! Je hebt de combinatie gevonden
+A game is still in progress. Do you really want to quit?	MainWindow		Een spel is nog bezig. Ben je zeker dat je wil stoppen?
+Start New Game	MainWindow		Start nieuw spel
+File	MainWindow		Bestand
+New Game	MainWindow		Nieuw spel
+Close	BoardView		Sluiten
+a board game inspired by Mastermind(tm)	App		Een bord spel geïnspireerd op Mastermind(tm)
+Quit	MainWindow		Afsluiten
+Complete Row	ButtonView		Rij volledig
