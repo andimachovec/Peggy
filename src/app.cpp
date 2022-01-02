@@ -105,7 +105,7 @@ App::AboutRequested()
 	aboutwindow->AddCopyright(2021, "Andi Machovec");
 	aboutwindow->AddAuthors(authors);
 	aboutwindow->SetVersion(version_string.String());
-	aboutwindow->AddDescription(B_TRANSLATE("a board game inspired by Mastermind(tm)"));
+	aboutwindow->AddDescription(B_TRANSLATE("A board game inspired by Mastermind™"));
 	//aboutwindow->AddExtraInfo(extra_info.String());
 	aboutwindow->Show();
 

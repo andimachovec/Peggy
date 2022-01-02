@@ -10,6 +10,6 @@ resource app_version {
 	internal = 0,
 
 	short_info = "Peggy",
-	long_info = "a board game inspired by Mastermind(tm)"
+	long_info = "A board game inspired by Mastermind™"
 };
 
