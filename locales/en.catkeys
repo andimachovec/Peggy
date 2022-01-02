@@ -1,16 +1,16 @@
-1	English	application/x-vnd.BlueSky-Peggy	2665636730
+1	English	application/x-vnd.BlueSky-Peggy	2804510101
 Help	MainWindow		Help
 A game is still in progress. Do you really want to start a new one?	MainWindow		A game is still in progress. Do you really want to start a new one?
-Keep Playing	MainWindow		Keep Playing
+A board game inspired by Mastermind™	App		A board game inspired by Mastermind™
+Keep playing	MainWindow		Keep playing
 Oops! You missed your last chance to guess the combination	BoardView		Oops! You missed your last chance to guess the combination
-About	MainWindow		About
 Time elapsed	TimerView		Time elapsed
 Congratulations! You've cracked the combination	BoardView		Congratulations! You've cracked the combination
 A game is still in progress. Do you really want to quit?	MainWindow		A game is still in progress. Do you really want to quit?
-Start New Game	MainWindow		Start New Game
-File	MainWindow		File
-New Game	MainWindow		New Game
+App	MainWindow		App
+Start new game	MainWindow		Start new game
+New game	MainWindow		New game
 Close	BoardView		Close
-a board game inspired by Mastermind(tm)	App		a board game inspired by Mastermind(tm)
 Quit	MainWindow		Quit
-Complete Row	ButtonView		Complete Row
+About…	MainWindow		About…
+Complete row	ButtonView		Complete row
