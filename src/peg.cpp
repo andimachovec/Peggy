@@ -36,6 +36,7 @@ Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
 	//create bitmap for drag and drop
 	fBitmap = new BBitmap(BRect(0,0,40,40), B_RGBA32, true);
 	create_bitmap();
+	fTarget->SetPenSize(1.0);
 
 }
 
@@ -175,6 +176,8 @@ Peg::draw_peg(BView *drawing_view, BPoint center)
 	rgb_color temp_color = drawing_view->HighColor();
 	drawing_view->SetHighColor(fColors[fColorIndex]);
 	drawing_view->FillEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
+	drawing_view->SetHighColor(0, 0, 0, 255);
+	drawing_view->StrokeEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
 	drawing_view->SetHighColor(temp_color);
 
 }
@@ -184,11 +187,11 @@ void
 Peg::init_colors()
 {
 
-	fColors[0].set_to(71, 45, 6);	// board_color (pseudo transparent)
+	fColors[0].set_to(102,65,9);	// board_color (pseudo transparent)
 
 	// for the result pegs
-	fColors[1].set_to(5,5,5);	// black
-	fColors[2].set_to(244,244,244);	// white
+	fColors[1].set_to(0,0,0);	// black
+	fColors[2].set_to(255,255,255);	// white
 
 	// for the color pegs
 	fColors[3].set_to(255,35,6); 	// red
@@ -199,9 +202,4 @@ Peg::init_colors()
 	fColors[8].set_to(255,118,0);	// orange
 
 }
-
-
-
-
-
 
