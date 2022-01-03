@@ -1,6 +1,6 @@
 # Peggy
 
-A board game for Haiku inspired by Mastermind(tm).
+A board game for Haiku inspired by Mastermind™.
 
 
 ![Screenshot](./screenshot.png)

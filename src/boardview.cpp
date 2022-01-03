@@ -191,7 +191,7 @@ void
 BoardView::Draw(BRect updateRect)
 {
 	// background
-	SetLowColor(104, 62, 28);
+	SetLowColor(149, 94, 13);
 	FillRect(updateRect, B_SOLID_LOW);
 
 

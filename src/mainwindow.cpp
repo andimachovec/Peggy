@@ -34,13 +34,13 @@ MainWindow::MainWindow(BRect geometry)
 
 	//define menu layout
 	BLayoutBuilder::Menu<>(fTopMenuBar)
-		.AddMenu(B_TRANSLATE("File"))
-			.AddItem(B_TRANSLATE("New Game"), MW_MENU_NEWGAME, 'N')
+		.AddMenu(B_TRANSLATE("App"))
+			.AddItem(B_TRANSLATE("New game"), MW_MENU_NEWGAME, 'N')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Quit"), B_QUIT_REQUESTED, 'Q')
 		.End()
 		.AddMenu(B_TRANSLATE("Help"))
-			.AddItem(B_TRANSLATE("About"), MW_MENU_ABOUT)
+			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), MW_MENU_ABOUT)
 		.End()
 	.End();
 
@@ -90,8 +90,8 @@ MainWindow::MessageReceived(BMessage *msg)
 				BAlert *newgame_alert = new BAlert(
 					"",
 					B_TRANSLATE("A game is still in progress. Do you really want to start a new one?"),
-					B_TRANSLATE("Start New Game"),
-					B_TRANSLATE("Keep Playing"),
+					B_TRANSLATE("Start new game"),
+					B_TRANSLATE("Keep playing"),
 					NULL,
 					B_WIDTH_AS_USUAL,
 					B_INFO_ALERT);
@@ -153,7 +153,7 @@ MainWindow::QuitRequested()
 				"",
 				B_TRANSLATE("A game is still in progress. Do you really want to quit?"),
 				B_TRANSLATE("Quit"),
-				B_TRANSLATE("Keep Playing"),
+				B_TRANSLATE("Keep playing"),
 				NULL,
 				B_WIDTH_AS_USUAL,
 				B_INFO_ALERT);
