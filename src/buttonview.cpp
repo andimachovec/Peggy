@@ -21,7 +21,7 @@ ButtonView::ButtonView()
 {
 
 	fSubmitRowButton = new BButton(	B_TRANSLATE("Complete row"),
-									new BMessage(BV_SUBMITBUTTON_CLICKED));
+									new BMessage(BT_SUBMITBUTTON_CLICKED));
 	fSubmitRowButton->SetEnabled(false);
 
 

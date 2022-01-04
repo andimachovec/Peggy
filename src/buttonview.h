@@ -14,7 +14,7 @@ class BButton;
 
 enum
 {
-	BV_SUBMITBUTTON_CLICKED ='bv00',
+	BT_SUBMITBUTTON_CLICKED ='bt00',
 };
 
 

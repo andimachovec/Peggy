@@ -128,7 +128,7 @@ MainWindow::MessageReceived(BMessage *msg)
 			break;
 		}
 
-		case BV_SUBMITBUTTON_CLICKED:
+		case BT_SUBMITBUTTON_CLICKED:
 		{
 
 			fBoardView->EvaluateActiveRow();
