@@ -194,17 +194,6 @@ BoardView::Draw(BRect updateRect)
 	SetLowColor(140, 86, 22);
 	FillRect(updateRect, B_SOLID_LOW);
 
-
-	// pegs
-	for(int row = 0; row < 9; ++row)
-	{
-		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
-		{
-			fRows[row]->GetColorPeg(peg_nr)->Draw();
-			fRows[row]->GetResultPeg(peg_nr)->Draw();
-		}
-	}
-
 	// active row marker
 	if (!fGameOver)
 	{
@@ -218,10 +207,23 @@ BoardView::Draw(BRect updateRect)
 		marker_rect.bottom = left_point.y + fColorPegRadius + marker_margin;
 		marker_rect.right = right_point.x + fColorPegRadius + marker_margin;
 
-		SetHighColor(246,226,155);
+		rgb_color activeColor = { 192, 115, 16 };
+		SetHighColor(activeColor);
+		FillRoundRect(marker_rect, 5, 5, B_SOLID_HIGH);
+		SetHighColor(tint_color(activeColor, B_LIGHTEN_2_TINT));
 		StrokeRoundRect(marker_rect, 5, 5, B_SOLID_HIGH);
+
 	}
 
+	// pegs
+	for(int row = 0; row < 9; ++row)
+	{
+		for(int peg_nr = 0; peg_nr < 4; ++peg_nr)
+		{
+			fRows[row]->GetColorPeg(peg_nr)->Draw();
+			fRows[row]->GetResultPeg(peg_nr)->Draw();
+		}
+	}
 }
 
 
