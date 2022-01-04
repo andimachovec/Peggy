@@ -96,6 +96,14 @@ Peg::SetColorIndex(uint8 color_index)
 }
 
 
+void
+Peg::SetOutline(bool with_outline)
+{
+
+	fWithOutline = with_outline;
+
+}
+
 uint8
 Peg::GetColorIndex()
 {

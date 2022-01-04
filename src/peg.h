@@ -24,6 +24,7 @@ public:
 	void SetCenter(BPoint center);
 	void SetRadius(float radius);
 	void SetColorIndex(uint8 color_index);
+	void SetOutline(bool with_outline);
 	uint8 GetColorIndex();
 	bool Contains(BPoint point);
 	BBitmap* GetBitmap();
