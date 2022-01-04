@@ -27,7 +27,7 @@ BoardRow::BoardRow(BView *target_view)
 	for(int i = 0; i < 4 ; ++i)
 	{
 		fColorPegs[i] = new Peg(target_view, BPoint(), 20, 0);
-		fResultPegs[i] = new Peg(target_view, BPoint(), 5, 0);
+		fResultPegs[i] = new Peg(target_view, BPoint(), 5, 0, false);
 	}
 
 }

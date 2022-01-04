@@ -17,7 +17,7 @@
 class Peg {
 public:
 	Peg();
-	Peg(BView *target, BPoint center, float radius, uint8 color_index);
+	Peg(BView *target, BPoint center, float radius, uint8 color_index, bool with_outline=true);
 	~Peg();
 	void Draw();
 	void SetTarget(BView *target);
@@ -31,7 +31,7 @@ public:
 
 private:
 	void create_bitmap();
-	void draw_peg(BView *drawing_view, BPoint center);
+	void draw_peg(BView *drawing_view, BPoint center, bool draw_outline);
 	void init_colors();
 
 	BView *fTarget;
@@ -40,6 +40,7 @@ private:
 	std::array<rgb_color, 9> fColors;
 	uint8 fColorIndex;
 	BBitmap *fBitmap;
+	bool fWithOutline;
 
 };
 

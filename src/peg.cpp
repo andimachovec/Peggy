@@ -14,7 +14,8 @@ Peg::Peg()
 	fTarget(nullptr),
 	fCenter(BPoint(0,0)),
 	fRadius(0),
-	fColorIndex(0)
+	fColorIndex(0),
+	fWithOutline(true)
 {
 
 	init_colors();
@@ -23,12 +24,13 @@ Peg::Peg()
 }
 
 
-Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index)
+Peg::Peg(BView *target, BPoint center, float radius, uint8 color_index, bool with_outline)
 	:
 	fTarget(target),
 	fCenter(center),
 	fRadius(radius),
-	fColorIndex(color_index)
+	fColorIndex(color_index),
+	fWithOutline(with_outline)
 {
 
 	init_colors();
@@ -52,7 +54,7 @@ void
 Peg::Draw()
 {
 
-	draw_peg(fTarget, fCenter);
+	draw_peg(fTarget, fCenter, fWithOutline);
 
 }
 
@@ -160,7 +162,7 @@ Peg::create_bitmap()
 	bitmap_view->LockLooper();
 	bitmap_view->SetLowColor(0,0,0,0);	// Transparency for round pegs
 	bitmap_view->FillRect(bitmap_view->Bounds(), B_SOLID_LOW);
-	draw_peg(bitmap_view, BPoint(20,20));
+	draw_peg(bitmap_view, BPoint(20,20), false); // always draw drag and drop bitmap without outline
 	bitmap_view->Sync();
 	bitmap_view->UnlockLooper();
 	fBitmap->RemoveChild(bitmap_view);
@@ -170,14 +172,19 @@ Peg::create_bitmap()
 
 
 void
-Peg::draw_peg(BView *drawing_view, BPoint center)
+Peg::draw_peg(BView *drawing_view, BPoint center, bool draw_outline)
 {
 
 	rgb_color temp_color = drawing_view->HighColor();
 	drawing_view->SetHighColor(fColors[fColorIndex]);
 	drawing_view->FillEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
-	drawing_view->SetHighColor(0, 0, 0, 255);
-	drawing_view->StrokeEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
+
+	if (draw_outline)
+	{
+		drawing_view->SetHighColor(0, 0, 0, 255);
+		drawing_view->StrokeEllipse(center, fRadius, fRadius, B_SOLID_HIGH);
+	}
+
 	drawing_view->SetHighColor(temp_color);
 
 }
