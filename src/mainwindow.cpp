@@ -36,11 +36,10 @@ MainWindow::MainWindow(BRect geometry)
 	BLayoutBuilder::Menu<>(fTopMenuBar)
 		.AddMenu(B_TRANSLATE("App"))
 			.AddItem(B_TRANSLATE("New game"), MW_MENU_NEWGAME, 'N')
+			.AddItem(B_TRANSLATE("Game rules" B_UTF8_ELLIPSIS), MW_MENU_RULES)
 			.AddSeparator()
+			.AddItem(B_TRANSLATE("About Peggy" B_UTF8_ELLIPSIS), MW_MENU_ABOUT)
 			.AddItem(B_TRANSLATE("Quit"), B_QUIT_REQUESTED, 'Q')
-		.End()
-		.AddMenu(B_TRANSLATE("Help"))
-			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), MW_MENU_ABOUT)
 		.End()
 	.End();
 
@@ -76,7 +75,7 @@ MainWindow::MessageReceived(BMessage *msg)
 
 	switch(msg->what)
 	{
-		// Help/About was clicked
+		// About was clicked
 		case MW_MENU_ABOUT:
 		{
 			be_app->PostMessage(B_ABOUT_REQUESTED);
@@ -106,6 +105,26 @@ MainWindow::MessageReceived(BMessage *msg)
 			fTimerView->StopTimer();
 			fBoardView->Reset();
 			fTimerView->StartTimer();
+			break;
+		}
+
+		case MW_MENU_RULES:
+		{
+			BString alertText(B_TRANSLATE(
+				"Your goal is to guess a 4-color code by dragging colored "
+				"pegs from the stock on the right to the active row in the "
+				"middle.\n"
+				"After completing a row, you get feedback via black and "
+				"white pins at the left of the row:\n\n"
+				"⚫ Black pin: a peg has the right color and position\n"
+				"⚪ White pin: a peg has the right color, but the wrong position\n\n"
+				"The positions of the black or white pins don't necessarily "
+				"correspond to the positions of the pegs in your guess."));
+
+			BAlert *alert = new BAlert(B_TRANSLATE("Peggy rules"), alertText,
+				B_TRANSLATE("OK"));
+			alert->SetShortcut(0, B_ESCAPE);
+			alert->Go();
 			break;
 		}
 

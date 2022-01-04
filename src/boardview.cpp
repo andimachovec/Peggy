@@ -426,8 +426,8 @@ BoardView::EvaluateActiveRow()
 	{
 		fGameOver = true;
 		BAlert *alert = new BAlert("",
-							B_TRANSLATE("Congratulations! You've cracked the combination"),
-							B_TRANSLATE("Close"));
+							B_TRANSLATE("Congratulations! You've cracked the combination!"),
+							B_TRANSLATE("OK"));
 		alert->Go();
 	}
 
@@ -437,8 +437,8 @@ BoardView::EvaluateActiveRow()
 		fGameOver = true;
 
 		BAlert *alert = new BAlert("",
-							B_TRANSLATE("Oops! You missed your last chance to guess the combination"),
-							B_TRANSLATE("Close"));
+							B_TRANSLATE("Oops! You missed your last chance to guess the combination."),
+							B_TRANSLATE("OK"));
 
 		alert->SetIcon(get_combination_bitmap());
 		alert->Go();

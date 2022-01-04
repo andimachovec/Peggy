@@ -22,6 +22,7 @@ enum
 {
 	MW_MENU_ABOUT ='mw00',
 	MW_MENU_NEWGAME,
+	MW_MENU_RULES,
 };
 
 

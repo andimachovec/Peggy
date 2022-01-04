@@ -1,16 +1,19 @@
-1	English	application/x-vnd.BlueSky-Peggy	2804510101
-Help	MainWindow		Hilfe
+1	English	application/x-vnd.BlueSky-Peggy	3698088573
+Congratulations! You've cracked the combination!	BoardView		Gratuliere! Du hast die richtige Kombination erraten!
 A game is still in progress. Do you really want to start a new one?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du wirklich ein neues Spiel beginnen?
 A board game inspired by Mastermind™	App		Ein von Mastermind™ inspiriertes Brettspiel 
 Keep playing	MainWindow		Weiterspielen
-Oops! You missed your last chance to guess the combination	BoardView		Uijeh! Du hast die letzte Chance verpasst die Kombination zu erraten
 Time elapsed	TimerView		Verstrichene Zeit
-Congratulations! You've cracked the combination	BoardView		Gratuliere! Du hast die richtige Kombination erraten
 A game is still in progress. Do you really want to quit?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du das Programm wirklich beenden?
 App	MainWindow		App
+OK	MainWindow		OK
 Start new game	MainWindow		Neues Spiel beginnen
 New game	MainWindow		Neues Spiel
-Close	BoardView		Schliessen
+Oops! You missed your last chance to guess the combination.	BoardView		Uijeh! Du hast die letzte Chance verpasst die Kombination zu erraten.
 Quit	MainWindow		Beenden
-About…	MainWindow		Über…
+Your goal is to guess a 4-color code by dragging colored pegs from the stock on the right to the active row in the middle.\nAfter completing a row, you get feedback via black and white pins at the left of the row:\n\n⚫ Black pin: a peg has the right color and position\n⚪ White pin: a peg has the right color, but the wrong position\n\nThe positions of the black or white pins don't necessarily correspond to the positions of the pegs in your guess.	MainWindow		Ziel des Spiels ist es einen 4-farbigen Code zu erraten, indem man farbige Klötze rechts aus dem Vorrat in die aktive Reihe in der Mitte zieht.\nImmer wenn man eine Reihe abgeschlossen hat, bekommt man Rückmeldung per schwarzer und weißer Stifte links der Reihe:\n\n⚫ Schwarzer Stift: ein Klotz hat die korrekte Farbe und Position.\n⚪ Weißer Stift: ein Klotz hat die korrekte Farbe, ist aber an der falschen Position.\n\nDie Positionen der schwarzen und weißen Stifte korrespondieren nicht unbedingt mit den Positionen deiner Klötze zu tun.
 Complete row	ButtonView		Reihe abschließen
+About Peggy…	MainWindow		Über Peggy…
+Game rules…	MainWindow		Spielregeln…
+OK	BoardView		OK
+Peggy rules	MainWindow		Peggy Spielregeln
