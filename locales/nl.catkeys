@@ -1,16 +1,20 @@
-1	English	application/x-vnd.BlueSky-Peggy	2804510101
-Help	MainWindow		Help
+1	English	application/x-vnd.BlueSky-Peggy	3698088573
+Congratulations! You've cracked the combination!	BoardView		Gefeliciteerd! Je hebt de combinatie gevonden!
 A game is still in progress. Do you really want to start a new one?	MainWindow		Een spel is nog bezig. Ben je zeker dat je opnieuw wil beginnen?
 A board game inspired by Mastermind™	App		Een bord spel geïnspireerd op Mastermind™
 Keep playing	MainWindow		Verder spelen
-Oops! You missed your last chance to guess the combination	BoardView		Oops! Je miste de laatste kans om de combinatie te vinden
 Time elapsed	TimerView		Tijd verstreken
-Congratulations! You've cracked the combination	BoardView		Gefeliciteerd! Je hebt de combinatie gevonden
 A game is still in progress. Do you really want to quit?	MainWindow		Een spel is nog bezig. Ben je zeker dat je wil stoppen?
 App	MainWindow		Toepassing
+OK	MainWindow		OK
 Start new game	MainWindow		Start nieuw spel
 New game	MainWindow		Nieuw spel
-Close	BoardView		Sluiten
+Oops! You missed your last chance to guess the combination.	BoardView		Oops! Je miste de laatste kans om de combinatie te vinden.
 Quit	MainWindow		Afsluiten
-About…	MainWindow		Over…
+Your goal is to guess a 4-color code by dragging colored pegs from the stock on the right to the active row in the middle.\nAfter completing a row, you get feedback via black and white pins at the left of the row:\n\n⚫ Black pin: a peg has the right color and position\n⚪ White pin: a peg has the right color, but the wrong position\n\nThe positions of the black or white pins don't necessarily correspond to the positions of the pegs in your guess.	MainWindow		Your goal is to guess a 4-color code by dragging colored pegs from the stock on the right to the active row in the middle.\nAfter completing a row, you get feedback via black and white pins at the left of the row:\n\n⚫ Black pin: a peg has the right color and position\n⚪ White pin: a peg has the right color, but the wrong position\n\nThe positions of the black or white pins don't necessarily correspond to the positions of the pegs in your guess.
 Complete row	ButtonView		Rij volledig
+About Peggy…	MainWindow		Over Peggy…
+Game rules…	MainWindow		Game rules…
+OK	BoardView		OK
+Peggy rules	MainWindow		Peggy rules
+
