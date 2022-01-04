@@ -191,7 +191,7 @@ void
 BoardView::Draw(BRect updateRect)
 {
 	// background
-	SetLowColor(149, 94, 13);
+	SetLowColor(140, 86, 22);
 	FillRect(updateRect, B_SOLID_LOW);
 
 	// active row marker
