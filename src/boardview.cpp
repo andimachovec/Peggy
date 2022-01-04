@@ -578,7 +578,9 @@ BoardView::get_combination_bitmap()
 
 	for (int i = 0; i < 4; ++i)
 	{
+		fCombiPegs[i]->SetOutline(false);
 		fCombiPegs[i]->Draw();
+		fCombiPegs[i]->SetOutline(true);
 	}
 
 	combi_bitmap_view->Sync();
