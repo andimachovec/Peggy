@@ -92,19 +92,8 @@ App::AboutRequested()
 	extra_info.Append(translators);
 	*/
 
-	BResources *appresource = BApplication::AppResources();
-	size_t size;
-	version_info *appversion = (version_info *)appresource->LoadResource('APPV',1,&size);
-	BString version_string;
-	version_string<<appversion->major;
-	version_string+=".";
-	version_string<<appversion->middle;
-	version_string+=".";
-	version_string<<appversion->minor;
-
 	aboutwindow->AddCopyright(2021, "Andi Machovec");
 	aboutwindow->AddAuthors(authors);
-	aboutwindow->SetVersion(version_string.String());
 	aboutwindow->AddDescription(B_TRANSLATE("A board game inspired by Mastermind™"));
 	//aboutwindow->AddExtraInfo(extra_info.String());
 	aboutwindow->Show();
