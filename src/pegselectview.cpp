@@ -6,6 +6,7 @@
 
 #include "pegselectview.h"
 #include "peg.h"
+#include "boardview.h"
 
 
 PegSelectView::PegSelectView()
@@ -32,8 +33,10 @@ PegSelectView::MessageReceived(BMessage *msg)
 
 	switch (msg->what)
 	{
-		case PV_DRAG_PEG:  	// do nothing, just prevent an error message for unhandled BMessages
-			break;			// to appear on stderr
+		case BV_DRAG_PEG:
+		case PV_DRAG_PEG:
+			break; 	// do nothing, we just wanna avoid errors on STDERR about unhandled messages
+					// when a peg is dropped on this view
 
 		default:
 			BView::MessageReceived(msg);

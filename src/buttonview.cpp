@@ -5,6 +5,8 @@
  */
 
 #include "buttonview.h"
+#include "pegselectview.h"
+#include "boardview.h"
 
 #include <Button.h>
 #include <Catalog.h>
@@ -47,6 +49,27 @@ ButtonView::DisableButton()
 {
 
 	fSubmitRowButton->SetEnabled(false);
+
+}
+
+
+void
+ButtonView::MessageReceived(BMessage *msg)
+{
+
+	switch(msg->what)
+	{
+		case BV_DRAG_PEG:
+		case PV_DRAG_PEG:
+			break; 	// do nothing, we just wanna avoid errors on STDERR about unhandled messages
+					// when a peg is dropped on this view
+
+
+		default:
+			BView::MessageReceived(msg);
+			break;
+
+	}
 
 }
 

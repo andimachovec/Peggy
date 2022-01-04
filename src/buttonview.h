@@ -23,6 +23,7 @@ public:
 	ButtonView();
 	void EnableButton();
 	void DisableButton();
+	void MessageReceived(BMessage *msg);
 
 private:
 	BButton *fSubmitRowButton;
