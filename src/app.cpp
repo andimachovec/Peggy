@@ -68,34 +68,31 @@ App::AboutRequested()
 		NULL
 	};
 
-	/*
 	BString code_contributors;
+	BString icon_designers;
 	BString translators;
 
-	code_contributors << B_TRANSLATE("Code contributions by:");
-	code_contributors << "\n"
-					  << "Humdinger\n";
+	code_contributors << B_TRANSLATE("Code contributions") << ":\n";
+	code_contributors << "Humdinger\n";
 
-	translators << B_TRANSLATE("Translations by:");
-	translators << "\n"
-				<< "Begasus\n"
-				<< "Alex Hitech\n"
-				<< "Davidmp\n"
-				<< "Florentina Mușat\n"
-				<< "cafeina\n"
-				<< "Fredrik Modéen\n"
-				<< "Emir Sarı\n";
+	icon_designers << B_TRANSLATE("Icon design") << ":\n";
+	icon_designers << "Humdinger\n";
+
+	translators << B_TRANSLATE("Translations") << ":\n";
+	translators << "Begasus\n"
+				<< "Humdinger\n";
 
 	BString extra_info;
 	extra_info.Append(code_contributors);
 	extra_info.Append("\n");
+	extra_info.Append(icon_designers);
+	extra_info.Append("\n");
 	extra_info.Append(translators);
-	*/
 
 	aboutwindow->AddCopyright(2021, "Andi Machovec");
 	aboutwindow->AddAuthors(authors);
 	aboutwindow->AddDescription(B_TRANSLATE("A board game inspired by Mastermind™"));
-	//aboutwindow->AddExtraInfo(extra_info.String());
+	aboutwindow->AddExtraInfo(extra_info.String());
 	aboutwindow->Show();
 
 }
