@@ -15,5 +15,7 @@ and *make bindcatalogs* adds the translations.
 
 After that, you can run *Peggy* from the generated *objects.xxxxx* directory.
 
-
+## Contributing
+Pull requests for bugfixes and design improvement are very welcome. For language translations please
+use Haiku´s Polyglot tool at https://i18n.kacperkasper.pl
 
