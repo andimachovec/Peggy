@@ -1,7 +1,7 @@
 1	English	application/x-vnd.BlueSky-Peggy	2689000012
 A game is still in progress. Do you really want to start a new one?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du wirklich ein neues Spiel beginnen?
 Congratulations! You've cracked the combination!	BoardView		Gratuliere! Du hast die richtige Kombination erraten!
-A board game inspired by Mastermind™	App		Ein von Mastermind™ inspiriertes Brettspiel 
+A board game inspired by Mastermind™	App		Ein von Mastermind™ inspiriertes Brettspiel
 Keep playing	MainWindow		Weiterspielen
 Time elapsed	TimerView		Verstrichene Zeit
 A game is still in progress. Do you really want to quit?	MainWindow		Ein Spiel ist gerade im Gange. Möchtest du das Programm wirklich beenden?
@@ -20,5 +20,4 @@ Icon design	App		Icondesign
 OK	BoardView		OK
 Code contributions	App		Codebeiträge
 Peggy rules	MainWindow		Peggy Spielregeln
-geln
 
