@@ -11,9 +11,7 @@
 #include <Alert.h>
 #include <Catalog.h>
 
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
+#include <random>
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -534,12 +532,13 @@ void
 BoardView::init_combination()
 {
 
-	int counter;
-	srand(time(NULL));
+	static std::random_device random_device;
+	static std::default_random_engine random_engine(random_device());
+	static std::uniform_int_distribution<unsigned> random_distribution(3, 8);
 
-	for (counter=0; counter<=3; counter++)
+	for (uint8 index = 0; index <= 3; ++index)
 	{
-		fCombination[counter]=(rand() % 6)+3;
+		fCombination[index] = random_distribution(random_engine);
 	}
 
 }
