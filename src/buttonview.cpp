@@ -22,6 +22,8 @@ ButtonView::ButtonView()
 	BView("buttonview", B_SUPPORTS_LAYOUT)
 {
 
+	SetViewColor(110, 62, 28);
+
 	fSubmitRowButton = new BButton(	B_TRANSLATE("Complete row"),
 									new BMessage(BT_SUBMITBUTTON_CLICKED));
 	fSubmitRowButton->SetEnabled(false);
@@ -31,6 +33,9 @@ ButtonView::ButtonView()
 		.SetInsets(B_USE_SMALL_SPACING)
 		.Add(fSubmitRowButton)
 	.Layout();
+
+
+
 
 }
 

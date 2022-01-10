@@ -18,6 +18,7 @@ TimerView::TimerView()
 	BTextView("timerview", B_SUPPORTS_LAYOUT|B_WILL_DRAW|B_PULSE_NEEDED)
 {
 
+	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	fRunning = false;
 	MakeEditable(false);
 
