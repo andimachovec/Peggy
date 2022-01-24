@@ -149,7 +149,7 @@ App::ReadyToRun()
 	// set default frame and add to settings message
 	if (!frame_retrieved)
 	{
-		mainwindow_frame.Set(100,100,750,500);
+		mainwindow_frame.Set(100,100,412,653);
 		settings_message.AddRect("mainwindow_frame", mainwindow_frame);
 		settings_message.Flatten(settings_file);
 	}
