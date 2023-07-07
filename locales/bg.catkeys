@@ -1,0 +1,22 @@
+1	Bulgarian	application/x-vnd.BlueSky-Peggy	2689000012
+A board game inspired by Mastermind™	App		Настолна игра вдъхновена от Mastermind™
+Code contributions	App		Принос на кода
+Icon design	App		Дизайна на иконата
+Translations	App		Преводи
+A game is still in progress. Do you really want to quit?	MainWindow		Все още тече игра. Наистина ли искате да се напуснете?
+A game is still in progress. Do you really want to start a new one?	MainWindow		Все още тече игра. Наистина ли искате да започнете нова?
+About Peggy…	MainWindow		Относно Peggy...
+App	MainWindow		Приложение
+Game rules…	MainWindow		Правила на играта...
+Keep playing	MainWindow		Продължете да играете
+New game	MainWindow		Нова игра
+OK	MainWindow		OK
+Peggy rules	MainWindow		Правилата на Peggy
+Quit	MainWindow		Изход
+Start new game	MainWindow		Започнете нова игра
+Your goal is to guess a 4-color code by dragging colored pegs from the stock on the right to the active row in the middle.\nAfter completing a row, you get feedback via black and white pins at the left of the row:\n\n⚫ Black pin: a peg has the right color and position\n⚪ White pin: a peg has the right color, but the wrong position\n\nThe positions of the black or white pins don't necessarily correspond to the positions of the pegs in your guess.	MainWindow		Целта ви е да отгатнете 4-цветен код, като плъзгате цветни пионки от склада вдясно към активния ред в средата.\nСлед като приключите ред, получавате обратна връзка чрез черни и бели пионки в лявата част на реда:\n\n⚫ Черна значка: пионката има правилния цвят и позиция\n⚪ Бяла значка: пионката има правилния цвят, но грешна позиция\n\nМестата на черните или белите пионки не отговарят непременно на позициите на пионките във вашето предположение.
+Complete row	ButtonView		Пълен ред
+Congratulations! You've cracked the combination!	BoardView		Поздравления! Вие открихте комбинацията!
+OK	BoardView		OK
+Oops! You missed your last chance to guess the combination.	BoardView		Упс! Пропуснахте последния си шанс да познаете комбинацията.
+Time elapsed	TimerView		Минало време
